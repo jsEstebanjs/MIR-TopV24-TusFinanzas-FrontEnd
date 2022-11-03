@@ -40,8 +40,7 @@ export default function Home() {
           </span>
           <h1 className={styles.NavVisionGeneralTitle}>Vista General</h1>
         </div>
-          <div className={styles.mainContainerVisionGeneral}>
-
+          <div className={styles.mainContainerVisionGeneralTwo}>
             <CardResumenHome  />
           </div>
       </div>
