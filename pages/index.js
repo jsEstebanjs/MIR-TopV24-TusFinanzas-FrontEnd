@@ -13,7 +13,6 @@ export default function Home() {
   };
   const handleClickHamburguer = () => {
     setVisibleHamburguer(!visibleHamburguer);
-    console.log(visibleHamburguer);
     if (!visibleHamburguer) {
       document.body.style.overflow = "hidden";
     } else {
@@ -23,9 +22,7 @@ export default function Home() {
 
   return (
     <div className={styles.mainContainerVisionGeneral}>
-      {visibleHamburguer ? (
-        <HamburguerMainHome handleVisible={handleClickHamburguer} />
-      ) : null}
+      <HamburguerMainHome visibleVar={visibleHamburguer} handleVisible={handleClickHamburguer} />
       <div className={styles.containerNavVisionGeneral}>
         <span
           onClick={handleClickHamburguer}
