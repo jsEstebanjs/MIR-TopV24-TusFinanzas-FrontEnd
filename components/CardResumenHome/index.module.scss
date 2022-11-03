@@ -1,0 +1,24 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerCardResumen{
+    width: 100%;
+    max-width: 254px;
+    height: max-content;
+    background-color: $Light-Black;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 20px;
+    .mainContainerCardTitle{
+        font-size: 18px;
+        font-weight: 500;
+        color: $White;
+        text-align: center;
+    }
+    .mainContainerCardMonth{
+        font-size: 14px;
+        font-weight: 500;
+        color: $White;
+        padding: 10px 0;
+    }
+}

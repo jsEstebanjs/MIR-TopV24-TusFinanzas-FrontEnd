@@ -10,7 +10,9 @@ function HamburguerMainHome({ handleVisible, visibleVar }) {
           visibleVar ? styles.mainContainerHamburguerHomeMove : null
         }`}
       >
-        <div className={styles.containerHamburguerHomeUser}></div>
+        <div className={styles.containerHamburguerHomeUser}>
+          <p>Menu</p>
+        </div>
         <div className={styles.containerHamburguerHomeCategories}></div>
       </div>
     </div>
