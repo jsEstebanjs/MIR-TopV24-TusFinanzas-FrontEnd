@@ -11,18 +11,23 @@ export default function Home() {
   const handleClickAddTransaccion = () => {
     setVisibleTransaccionBtn(!visibleTransaccionBtn);
   };
-  const handleClickHamburguer = () => {
-    setVisibleHamburguer(!visibleHamburguer);
-    if (!visibleHamburguer) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style = "initial";
-    }
-  };
+
+    const handleClickHamburguer = () => {
+      if(window.innerWidth < 1200){
+        setVisibleHamburguer(!visibleHamburguer);
+        if (!visibleHamburguer) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style = "initial";
+        }
+      }
+    };
+  
+
 
   return (
     <div className={styles.mainContainerVisionGeneral}>
-      <HamburguerMainHome visibleVar={visibleHamburguer} handleVisible={handleClickHamburguer} />
+        <HamburguerMainHome visibleVar={visibleHamburguer} handleVisible={handleClickHamburguer} />
       <div className={styles.containerNavVisionGeneral}>
         <span
           onClick={handleClickHamburguer}
@@ -32,10 +37,12 @@ export default function Home() {
         </span>
         <h1 className={styles.NavVisionGeneralTitle}>Vista General</h1>
       </div>
+
       <div
         onClick={handleClickAddTransaccion}
         className={styles.containerBtnAddTransaccion}
       >
+        <p className={`${styles.infoPTransaccionDesktop} ${visibleTransaccionBtn ? styles.infoPTransaccionDesktopNoView : null}`}>Agregar Transaccion</p>
         <span className={styles.btnAddTransaccion}>
           <MdAdd
             className={visibleTransaccionBtn ? styles.svgAddRotate : null}
