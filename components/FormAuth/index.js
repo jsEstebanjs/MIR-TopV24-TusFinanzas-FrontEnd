@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-function AuthRegister() {
+function FormAuth() {
   const {
     register,
     handleSubmit,
@@ -86,4 +86,4 @@ function AuthRegister() {
     </div>
   );
 }
-export default AuthRegister;
+export default FormAuth;

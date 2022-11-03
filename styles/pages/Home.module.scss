@@ -1,0 +1,92 @@
+@import '../abstracts/variables.scss';
+
+.mainContainerVisionGeneral{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, $Main-Blue 0%, $Main-Blue 30%, $Black 30%, $Black  100%)
+}
+.containerNavVisionGeneral{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 15px;
+    color: $White;
+    align-items: center;
+    justify-content: flex-start;
+}
+.NavVisionGeneralIconBars{
+    font-size: 24px;
+    margin-right: 10px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.NavVisionGeneralTitle{
+    font-size: 18px;
+    font-weight: 500;
+}
+.containerBtnAddTransaccion{
+    position: absolute;
+    background-color: transparent;
+    width: max-content;
+    bottom: 70px;
+    right: 60px;
+}
+.btnAddTransaccion{
+    display: flex;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color:$White;
+    background-color: $Main-Blue;
+    z-index: 3;
+    position: absolute;
+    cursor: pointer;
+    
+    svg{
+        transition: all 0.3s;
+    }
+    .svgAddRotate{
+        transform: rotate(135deg);
+    }
+
+}
+
+.btnAddTransaccionSpent{
+    background-color: red;
+    z-index: 2;
+    transition: all 0.5s;
+
+}
+.btnAddTransaccionEntry{
+    background-color: green;
+    z-index: 1;
+    transition: all 0.5s;
+}
+.btnAddTransaccionSpentBottom{
+    transform: translateY(-0.7in);
+}
+.btnAddTransaccionEntryBottom{
+    transform: translateY(-1.4in);
+}
+.infoBtnAddTransaccion{
+    position: absolute;
+    right: 60px;
+    background-color: $Light-Black;
+    font-size: 16px;
+    padding: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity ease 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.infoBtnAddTransaccionView{
+    pointer-events: all;
+    opacity: 1;
+}
+
+
