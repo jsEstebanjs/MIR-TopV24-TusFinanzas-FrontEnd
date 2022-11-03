@@ -1,30 +1,11 @@
 import styles from "./index.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { donutData } from './constants';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function CardResumenHome() {
-  const data = {
-    labels: [],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [0, 0, 10],
-        backgroundColor: [
-          "#117D10",
-          "#F44236",
-          "#AFACAC",
-        ],
-        borderColor: [
-          "#117D10",
-          "#F44236",
-          "#AFACAC",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
   return (
     <div className={styles.mainContainerCardResumen}>
@@ -33,7 +14,7 @@ function CardResumenHome() {
       <div className={styles.mainContainerCardEntryAndSpent}>
         <div className={styles.containerChartCardResumen}>
           <Doughnut
-            data={data}
+            data={donutData}
             options={{
               responsive: true,
             }}
