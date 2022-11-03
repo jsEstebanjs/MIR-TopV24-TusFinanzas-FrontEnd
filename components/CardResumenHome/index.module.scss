@@ -1,0 +1,56 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerCardResumen{
+    width: 100%;
+    max-width: 400px;
+    height: 35%;
+    min-height: 200px;
+    background-color: $Light-Black;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px;
+    .mainContainerCardTitle{
+        font-size: 18px;
+        font-weight: 500;
+        color: $White;
+        text-align: center;
+    }
+    .mainContainerCardMonth{
+        font-size: 16px;
+        font-weight: 500;
+        color: $White;
+        padding: 5px 0;
+    }
+    .mainContainerCardEntryAndSpent{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 10px;
+        .containerChartCardResumen{
+            display: flex;
+            flex-direction: column;
+            height: 100px;
+            width: 100px;
+        }
+        .containerPricesCardResumen{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            .containerInfoEntrysOrSpents{
+                color: $White;
+            }
+            .pInfoCardEntry{
+                color: $Green;
+            }
+            .pInfoCardSpent{
+                color: $Red;
+            }
+            .pInfoResult{
+                color: $White;
+            }
+        }
+    }
+}
