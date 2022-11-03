@@ -2,7 +2,6 @@ export const donutData = {
     labels: [],
     datasets: [
       {
-        label: "# of Votes",
         data: [0, 0, 10],
         backgroundColor: [
           "#117D10",
