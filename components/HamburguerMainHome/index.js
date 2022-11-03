@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 function HamburguerMainHome({ handleVisible, visibleVar }) {
   
   return (
-    <div onClick={handleVisible}>
+    <div className={styles.mainContainerHamburguer} onClick={handleVisible}>
       <div className={`${styles.containerOpacity} ${visibleVar ? styles.containerOpacityViwe : null}`}></div>
       <div
         className={`${styles.mainContainerHamburguerHome} ${
