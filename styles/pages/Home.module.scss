@@ -5,14 +5,13 @@
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    // background-color: $Main-Blue;
-    background: linear-gradient(to bottom, $Main-Blue 0%, $Main-Blue 40%, $Black 40%, $Black  100%)
+    background: linear-gradient(to bottom, $Main-Blue 0%, $Main-Blue 30%, $Black 30%, $Black  100%)
 }
 .containerNavVisionGeneral{
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     color: $White;
     align-items: center;
     justify-content: flex-start;
@@ -21,6 +20,7 @@
     font-size: 24px;
     margin-right: 10px;
     font-weight: 300;
+    cursor: pointer;
 }
 .NavVisionGeneralTitle{
     font-size: 18px;
