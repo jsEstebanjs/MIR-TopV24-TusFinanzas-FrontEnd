@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-   background-color: $Black;
+    height: max-content;
+    background-color: $Black;
 }
 .mainContainerNavVisionGeneral{
     display: flex;
@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 10px;
     align-items: center;
 }
@@ -42,7 +42,7 @@
     font-weight: 500;
 }
 .containerBtnAddTransaccion{
-    position: absolute;
+    position: fixed;
     background-color: transparent;
     width: max-content;
     bottom: 70px;
@@ -143,7 +143,7 @@
     }
     .containerNavVisionGeneral{
         height: 100%;
-        max-height: 62px;
+        min-height: 62px;
 
     }
     .NavVisionGeneralIconBars{
