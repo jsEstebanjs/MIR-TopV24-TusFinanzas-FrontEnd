@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
 import styles from "./index.module.scss";
+import { loginAndRegister } from '../../utils/loginAndRegister';
 
-function FormAuth({ btn, isName }) {
+function FormAuth({ btn, isName,url }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const SubmitForm = (data) => {
-    console.log(data);
+  const SubmitForm = async(data) => {
+    const result = await loginAndRegister(url,data);
+    localStorage.setItem("token", result.data.data.token);
   };
 
   return (

@@ -15,6 +15,7 @@ function Register(){
                 <FormAuth 
                 btn="Registrarse"
                 isName={true}
+                url="http://localhost:8080/users/register"
                 />
             </div>
 

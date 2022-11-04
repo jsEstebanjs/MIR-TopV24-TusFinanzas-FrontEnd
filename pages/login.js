@@ -15,6 +15,7 @@ function Login(){
                 <FormAuth 
                 btn="Iniciar Sesion"
                 isName={false}
+                url="http://localhost:8080/users/login"
                 />
             </div>
 
