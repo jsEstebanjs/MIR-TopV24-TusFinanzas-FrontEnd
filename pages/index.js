@@ -6,6 +6,8 @@ import HamburguerMainHome from "../components/HamburguerMainHome";
 import CardResumenHome from "../components/CardResumenHome";
 import ChartOfAccounts from "../components/ChartOfAccounts";
 import BalanceCard from "../components/BalanceCard";
+import CardTransaccions from "../components/CardTransaccions";
+
 
 export default function Home() {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
@@ -46,6 +48,7 @@ export default function Home() {
             <CardResumenHome  />
             <ChartOfAccounts amount={700000} latest={"11/03/2022"} />
             <BalanceCard  amount={700000} />
+            <CardTransaccions />
 
           </div>
       </div>
