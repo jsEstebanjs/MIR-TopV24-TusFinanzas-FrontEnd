@@ -1,0 +1,53 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerFormAuth{
+    display: flex;
+    flex-direction: column;
+    color: $White;
+    background-color: $Light-Black;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    .containerFormAuth{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        max-width: 500px;
+        .btnSubmitForm{
+            width: max-content;
+            margin: 0 auto;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: $Main-Blue;
+            color: $White;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .containerLabelAndInputFormAuth{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            label{
+                font-size: 18px;
+                font-weight: 500;
+            }
+            input{
+                outline: none;
+                font-size: 16px;
+                border: none;
+                background-color: $Light-Black;
+                border-bottom: 1px solid $White;
+                color: $White;
+            }
+            .errorP{
+                color: $Red;
+                font-size: 15px;
+            }
+        }
+    }
+}
