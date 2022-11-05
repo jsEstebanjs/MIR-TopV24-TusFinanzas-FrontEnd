@@ -1,46 +1,73 @@
 import { useForm } from "react-hook-form";
+import styles from "./index.module.scss";
+import { loginAndRegister } from '../../utils/loginAndRegister';
+import ErrorLoginAndRegister from "../ErrorLoginAndRegister";
+import { useState } from "react";
 
-function FormAuth() {
+function FormAuth({ btn, isName,url }) {
+
+  const [error,setError] = useState("")
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const SubmitForm = (data) => {
-    console.log(data)
+  const handleErrorModal=(message)=>{
+    setError(message)
+  }
+
+  const SubmitForm = async(data) => {
+    const result = await loginAndRegister(url,data);
+    if(result.response.status !== 400){
+      localStorage.setItem("token", result.data.data.token)
+    }else{
+      handleErrorModal(result.response.data.data)
+    }
+ 
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(SubmitForm)}>
-        <div>
-          <label htmlFor="name">Nombre</label>
-          <input
-            id="name"
-            type="text"
-            {...register("name", {
-              required: true,
-              maxLength: 100,
-              minLength: 3,
-              pattern:/^([A-ZÑÁÉÍÓÚÜ]||[a-zñáéíóú]+[\s]*)+$/
-            })}
-          />
-          {errors.name?.type === "required" && (
-            <p>El campo nombre es requerido</p>
-          )}
-          {errors.name?.type === "maxLength" && (
-            <p>La longitud maxima del nombre es de 100 caracteres</p>
-          )}
-          {errors.name?.type === "minLength" && (
-            <p>La longitud minima del nombre es de 3 caracteres</p>
-          )}
-           {errors.name?.type === "pattern" && (
-            <p>El nombre no es valido</p>
-          )}
-        </div>
+    <div className={styles.mainContainerFormAuth}>
+       <ErrorLoginAndRegister handle={handleErrorModal} errorMessage={error} active={error}/> 
+      <form
+        className={styles.containerFormAuth}
+        onSubmit={handleSubmit(SubmitForm)}
+      >
+        {isName === true ? (
+          <div className={styles.containerLabelAndInputFormAuth}>
+            <label htmlFor="name">Nombre</label>
+            <input
+              id="name"
+              type="text"
+              {...register("name", {
+                required: true,
+                maxLength: 100,
+                minLength: 3,
+                pattern: /^([A-ZÑÁÉÍÓÚÜ]||[a-zñáéíóú]+[\s]*)+$/,
+              })}
+            />
+            {errors.name?.type === "required" && (
+              <p className={styles.errorP}>El campo nombre es requerido</p>
+            )}
+            {errors.name?.type === "maxLength" && (
+              <p className={styles.errorP}>
+                La longitud maxima del nombre es de 100 caracteres
+              </p>
+            )}
+            {errors.name?.type === "minLength" && (
+              <p className={styles.errorP}>
+                La longitud minima del nombre es de 3 caracteres
+              </p>
+            )}
+            {errors.name?.type === "pattern" && (
+              <p className={styles.errorP}>El nombre no es valido</p>
+            )}
+          </div>
+        ) : null}
 
-        <div>
+        <div className={styles.containerLabelAndInputFormAuth}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -51,12 +78,12 @@ function FormAuth() {
             })}
           />
           {errors.email?.type === "required" && (
-            <p>El campo del Email es requerido</p>
+            <p className={styles.errorP}>El campo del Email es requerido</p>
           )}
-          {errors.email?.type === "pattern" && <p>El email no es valido</p>}
+          {errors.email?.type === "pattern" && <p className={styles.errorP}>El email no es valido</p>}
         </div>
 
-        <div>
+        <div className={styles.containerLabelAndInputFormAuth}>
           <label htmlFor="password">Contraseña</label>
           <input
             id="password"
@@ -67,21 +94,20 @@ function FormAuth() {
             })}
           />
           {errors.password?.type === "required" && (
-            <p>
-                La contraseña es requerida
-            </p>
+            <p className={styles.errorP}>La contraseña es requerida</p>
           )}
-          
+
           {errors.password?.type === "pattern" && (
-            <p>
+            <p className={styles.errorP}>
               La contraseña debe tener entre 8 y 16 caracteres, con al menos un
               dígito, al menos una letra minúscula y al menos una letra
               mayúscula. NO puede tener otros símbolos.
             </p>
           )}
-
         </div>
-        <button type="submit">Registrarse</button>
+        <button className={styles.btnSubmitForm} type="submit">
+          {btn}
+        </button>
       </form>
     </div>
   );

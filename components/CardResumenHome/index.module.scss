@@ -3,13 +3,14 @@
 .mainContainerCardResumen{
     width: 100%;
     max-width: 400px;
-    height: 35%;
+    height: max-content;
     min-height: 200px;
     background-color: $Light-Black;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
     padding: 10px;
+    margin-bottom: 10px;
     .mainContainerCardTitle{
         font-size: 18px;
         font-weight: 500;

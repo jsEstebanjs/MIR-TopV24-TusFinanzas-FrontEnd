@@ -1,0 +1,26 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerErrorLoginAndRegister{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: -200px;
+    left: calc(50% - 100px);
+    background-color: $White;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: top ease 1s;
+    .errorMessage{
+        color: $Black;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+}
+.mainContainerErrorTop {
+    top: 20px;
+}

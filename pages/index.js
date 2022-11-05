@@ -4,6 +4,10 @@ import { MdAdd, MdRemove } from "react-icons/md";
 import { useState } from "react";
 import HamburguerMainHome from "../components/HamburguerMainHome";
 import CardResumenHome from "../components/CardResumenHome";
+import ChartOfAccounts from "../components/ChartOfAccounts";
+import BalanceCard from "../components/BalanceCard";
+import CardTransaccions from "../components/CardTransaccions";
+
 
 export default function Home() {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
@@ -42,9 +46,14 @@ export default function Home() {
         </div>
           <div className={styles.mainContainerVisionGeneralTwo}>
             <CardResumenHome  />
+            <ChartOfAccounts amount={700000} latest={"11/03/2022"} />
+            <BalanceCard  amount={700000} />
+            <CardTransaccions />
+
           </div>
       </div>
 
+    {/* aqui van los btn de entry and spent */}
       <div
         onClick={handleClickAddTransaccion}
         className={styles.containerBtnAddTransaccion}
@@ -95,6 +104,7 @@ export default function Home() {
           <MdAdd />
         </span>
       </div>
+
     </div>
   );
 }

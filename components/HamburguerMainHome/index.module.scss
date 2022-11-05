@@ -50,7 +50,7 @@
 @media(min-width:1200px){
     .mainContainerHamburguer{
     width: 254px;
-    height: 100%;
+    min-height: 100%;
     }
     .containerOpacity{
         display: none;

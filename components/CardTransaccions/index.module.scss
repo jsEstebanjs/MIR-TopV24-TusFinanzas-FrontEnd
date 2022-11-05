@@ -1,0 +1,24 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerCardTransaccions{
+    width: 100%;
+    max-width: 400px;
+    height: max-content;
+    min-height: 100px;
+    background-color: $Light-Black;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: $White;
+    .titleContainerCardTransaccions{
+        text-align: center;
+        font-weight: 500;
+        font-size: 18px;
+    }
+    .containerModalTransaccions{
+        display: flex;
+        flex-direction: column;
+    }
+}
