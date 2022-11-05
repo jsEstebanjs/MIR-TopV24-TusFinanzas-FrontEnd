@@ -1,21 +1,36 @@
 import { useForm } from "react-hook-form";
 import styles from "./index.module.scss";
 import { loginAndRegister } from '../../utils/loginAndRegister';
+import ErrorLoginAndRegister from "../ErrorLoginAndRegister";
+import { useState } from "react";
 
 function FormAuth({ btn, isName,url }) {
+
+  const [error,setError] = useState("")
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const handleErrorModal=(message)=>{
+    setError(message)
+  }
+
   const SubmitForm = async(data) => {
     const result = await loginAndRegister(url,data);
-    localStorage.setItem("token", result.data.data.token);
+    if(result.response.status !== 400){
+      localStorage.setItem("token", result.data.data.token)
+    }else{
+      handleErrorModal(result.response.data.data)
+    }
+ 
   };
 
   return (
     <div className={styles.mainContainerFormAuth}>
+       <ErrorLoginAndRegister handle={handleErrorModal} errorMessage={error} active={error}/> 
       <form
         className={styles.containerFormAuth}
         onSubmit={handleSubmit(SubmitForm)}

@@ -8,7 +8,7 @@ export const loginAndRegister = async(url,info) => {
         return res
     }
     catch(err){
-        console.log(err)
+        return err
     }
 
 }
