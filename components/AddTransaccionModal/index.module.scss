@@ -1,0 +1,158 @@
+@import '../../styles/abstracts/variables.scss';
+.containerOpacity{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    left: 0;
+    background-color: $Black;
+    opacity: 0.75;
+    z-index: 5;
+    transition: top ease 0.5s;
+}
+.containerOpacityVisible{
+    top: 0;
+}
+.mainContainerAddTransaccionModal{
+    display: flex;
+    flex-direction: column;
+    background-color: $Light-Black;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    z-index: 5;
+    transition: top ease 0.5s;
+    .titleContainerAddTransaccionModal{
+        color: $White;
+        font-size: 22px;
+        font-weight: 500;
+        padding: 10px;
+        text-align: center;
+    }
+    .colorGreen{
+        background-color: $Green;
+    }
+    .colorRed{
+        background-color: $Red;
+    }
+    .mainContainerFormTransaccion{
+        color: $White;
+        display: flex;
+        flex-direction: column;
+        .containerFormAuth{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .containerLabelAndInputFormAuth{
+                display: flex;
+                flex-direction: column;
+                margin: 10px 0;
+                label{
+                    width: max-content;
+                    margin: 0 auto;
+                }
+                input{
+                    width: 100%;
+                    max-width: 300px;
+                    background-color: $Light-Black;
+                    border: 1px solid $White;
+                    padding: 10px;
+                    outline: none;
+                    color: $White;
+                    font-size: 16px;
+                }
+                input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+                }
+                input[type=number] { -moz-appearance:textfield; }
+                .inputCategories{
+                    cursor: pointer;
+                }
+
+
+                textarea{
+                    max-width: 217px;
+                    min-width: 217px;
+                    outline: none;
+                    color: $White;
+                    padding: 10px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    background-color: $Light-Black;
+                    border: 1px solid $White;
+                }
+            }
+            .containerBtnForm{
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                .btnCancelForm{
+                    padding: 10px;
+                    background-color: $Light-Black;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    font-size: 16px;
+                    font-weight: 500;
+                    border-radius: 5px;
+                }
+                .btnCancelGreen{
+                    color: $Green;
+                    &:hover{
+                        background-color:  #c8e6c9;
+                    }
+                }
+                .btnCancelRed{
+                    color: $Red;
+                    &:hover{
+                        background-color: #f07d75;
+                    }
+                }
+                .btnSubmitForm{
+                    padding: 10px;
+                    color: $White;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: 500;
+                    border-radius: 5px;
+                    border: 1px solid transparent;
+                }
+                .btnSubmitFormGreen{
+                    background-color: $Green;
+                }
+                .btnSubmitFormRed{
+                    background-color: $Red;
+                }
+            }
+        }
+    }
+
+}
+.mainContainerAddTransaccionModaVisible{
+    top: 0;
+}
+@media(min-width:840px){
+    .mainContainerAddTransaccionModal{
+        max-width: 800px;
+        height: max-content;
+        top: -100%;
+        left: calc(50% - 400px);
+        border-radius: 20px;
+        .titleContainerAddTransaccionModal{
+            border-radius: 20px 20px 0 0;
+        }
+        .mainContainerFormTransaccion{
+            padding: 20px;
+        }
+    }
+    .mainContainerAddTransaccionModaVisible{
+        top: 10%;
+    }
+
+}
