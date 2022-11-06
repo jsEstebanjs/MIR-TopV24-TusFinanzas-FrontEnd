@@ -1,7 +1,14 @@
 import styles from "./index.module.scss";
 import { useForm } from "react-hook-form";
+import SelectCategory from "./SelectCategory";
+import Image from "next/image";
+import imgPlaceHolder from './imagen.png'
+import { useState } from "react";
 
 function AddTransaccionModal({ color, type, title, visible, handle }) {
+
+  const [category,setCategory] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -10,8 +17,13 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
 
   const SubmitForm = async (data) => {};
 
+  const handleCategoryModal=()=>{
+    setCategory(!category)
+  }
+
   return (
     <>
+    <SelectCategory handle={handleCategoryModal} visible={category}/>
       <div
         onClick={() => handle(false)}
         className={`${styles.containerOpacity} ${
@@ -37,17 +49,26 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
           >
             <div className={styles.containerLabelAndInputFormAuth}>
               <label htmlFor="categories">Categoria</label>
-              <input
+              <div className={styles.containerImgAndCategory}>
+                <Image 
+                width={50}
+                height={50}
+                src={imgPlaceHolder}
+                />
+                <input
+                onClick={handleCategoryModal}
                 className={styles.inputCategories}
                 id="categories"
                 type="text"
-                disabled
+                // disabled
                 value="Seleccionar Categoria"
                 {...register("categories", {
                   required: true,
 
                 })}
               />
+              </div>
+
               {errors.categories?.type === "required" && (
                 <p className={styles.errorP}>Escoge una Categoria</p>
               )}
