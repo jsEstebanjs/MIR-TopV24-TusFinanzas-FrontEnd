@@ -2,22 +2,39 @@
 
 .mainContainerModalCategory{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     cursor: pointer;
-    svg{
-        font-size: 26px;
-        color: $White;
-    }
     .containerModalCategory{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 5px;
+        svg{
+            font-size: 26px;
+            color: $White;
+            transition: all 0.3s;
+        }
+        .rotateArrowSVG{
+            transform: rotate(180deg);
+        }
+    }
+    .containerModalCategoryImg{
         display: flex;
         flex-direction: row;
         gap: 10px;
         align-items: center;
         .titleModalCategory{
             color: $White;
-            font-size: 24px;
+            font-size: 18px;
         }
+    }
+    .mainContainerSubCategories{
+        display: none;
+    }
+    .mainContainerSubCategoriesVisible{
+        display: flex;
+        flex-direction: column;
     }
 }

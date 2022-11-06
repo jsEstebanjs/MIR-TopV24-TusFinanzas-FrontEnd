@@ -8,6 +8,7 @@ import { useState } from "react";
 function AddTransaccionModal({ color, type, title, visible, handle }) {
 
   const [category,setCategory] = useState(false)
+  const [objTransaccion , setObjTransaccion] = useState({})
 
   const {
     register,
@@ -20,10 +21,17 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
   const handleCategoryModal=()=>{
     setCategory(!category)
   }
+  const handleSelectSubCategory = (img,name,id) =>{
+    setObjTransaccion({...objTransaccion,img,name})
+  }
 
   return (
     <>
-    <SelectCategory handle={handleCategoryModal} visible={category}/>
+    <SelectCategory 
+    handle={handleCategoryModal}
+    visible={category}
+    handleSelectSubCategory={handleSelectSubCategory}
+    />
       <div
         onClick={() => handle(false)}
         className={`${styles.containerOpacity} ${
@@ -53,15 +61,15 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 <Image 
                 width={50}
                 height={50}
-                src={imgPlaceHolder}
+                src={ objTransaccion.img ? objTransaccion.img : imgPlaceHolder }
                 />
                 <input
                 onClick={handleCategoryModal}
                 className={styles.inputCategories}
                 id="categories"
                 type="text"
-                // disabled
-                value="Seleccionar Categoria"
+                placeholder="Seleccionar Categoria"
+                value={objTransaccion.name}
                 {...register("categories", {
                   required: true,
 
