@@ -2,13 +2,12 @@ import styles from "./index.module.scss";
 import { useForm } from "react-hook-form";
 import SelectCategory from "./SelectCategory";
 import Image from "next/image";
-import imgPlaceHolder from './imagen.png'
+import imgPlaceHolder from "./imagen.png";
 import { useState } from "react";
 
 function AddTransaccionModal({ color, type, title, visible, handle }) {
-
-  const [category,setCategory] = useState(false)
-  const [objTransaccion , setObjTransaccion] = useState({})
+  const [category, setCategory] = useState(false);
+  const [objTransaccion, setObjTransaccion] = useState({});
 
   const {
     register,
@@ -16,27 +15,30 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
     formState: { errors },
   } = useForm();
 
+  //para cuando demos guadar 
   const SubmitForm = async (data) => {};
 
-  const handleCategoryModal=()=>{
-    setCategory(!category)
-  }
-  const handleSelectSubCategory = (img,name,id) =>{
-    setObjTransaccion({...objTransaccion,img,name})
-  }
+  const handleCategoryModal = () => {
+    setCategory(!category);
+  };
+  //ya se esta guardando gracias al form solo debo agregar eso al enviar
+  const handleSelectSubCategory = (img, name, id) => {
+    setObjTransaccion({ ...objTransaccion, img, name });
+  };
+
 
   return (
     <>
-    <SelectCategory 
-    type={type}
-    handle={handleCategoryModal}
-    visible={category}
-    handleSelectSubCategory={handleSelectSubCategory}
-    />
+      <SelectCategory
+        type={type}
+        handle={handleCategoryModal}
+        visible={category}
+        handleSelectSubCategory={handleSelectSubCategory}
+      />
       <div
         onClick={() => {
-          setObjTransaccion({ name:"Seleccionar Categoria" })
-          handle(false)
+          setObjTransaccion({ name: "Seleccionar Categoria" });
+          handle(false);
         }}
         className={`${styles.containerOpacity} ${
           visible.title ? styles.containerOpacityVisible : null
@@ -62,24 +64,27 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
             <div className={styles.containerLabelAndInputFormAuth}>
               <label htmlFor="categories">Categoria</label>
               <div className={styles.containerImgAndCategory}>
-                <Image 
-                width={50}
-                height={50}
-                alt={objTransaccion.name}
-                src={ objTransaccion.img ? objTransaccion.img : imgPlaceHolder }
+                <Image
+                  width={50}
+                  height={50}
+                  alt={objTransaccion.name}
+                  src={objTransaccion.img ? objTransaccion.img : imgPlaceHolder}
                 />
                 <input
-                onClick={handleCategoryModal}
-                className={styles.inputCategories}
-                id="categories"
-                type="text"
-                placeholder="Seleccionar Categoria"
-                value={objTransaccion.name === undefined ? "Seleccionar Categoria" : objTransaccion.name}
-                {...register("categories", {
-                  required: true,
-
-                })}
-              />
+                  onClick={handleCategoryModal}
+                  className={styles.inputCategories}
+                  id="categories"
+                  type="text"
+                  placeholder="Seleccionar Categoria"
+                  value={
+                    objTransaccion.name === undefined
+                      ? "Seleccionar Categoria"
+                      : objTransaccion.name
+                  }
+                  {...register("categories", {
+                    required: true,
+                  })}
+                />
               </div>
 
               {errors.categories?.type === "required" && (
@@ -126,8 +131,8 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
               <button
                 type="button"
                 onClick={() => {
-                  setObjTransaccion({})
-                  handle(false)
+                  setObjTransaccion({});
+                  handle(false);
                 }}
                 className={`${styles.btnCancelForm} ${
                   color === "Green"
