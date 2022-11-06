@@ -2,7 +2,7 @@ import styles from "./SelectCategory.module.scss";
 import ModalCategory from "./ModalCategory";
 import { categories } from "./constands";
 
-function SelectCategory({ handle, visible , handleSelectSubCategory}) {
+function SelectCategory({ handle, visible, handleSelectSubCategory, type }) {
   return (
     <>
       <div
@@ -20,15 +20,19 @@ function SelectCategory({ handle, visible , handleSelectSubCategory}) {
           Selecciona una Categoria
         </h2>
         <div className={styles.containerSelectCategory}>
-          {categories.map((item) => (
-            <ModalCategory
-              handleSelectSubCategory={handleSelectSubCategory}
-              func={handle}
-              src={item.favicon}
-              name={item.name}
-              sub={item.subcategories}
-            />
-          ))}
+          {categories.map((item) => {
+            if (item.type === type) {
+              return (
+                <ModalCategory
+                  handleSelectSubCategory={handleSelectSubCategory}
+                  func={handle}
+                  src={item.favicon}
+                  name={item.name}
+                  sub={item.subcategories}
+                />
+              )
+            }
+          })}
         </div>
       </div>
     </>

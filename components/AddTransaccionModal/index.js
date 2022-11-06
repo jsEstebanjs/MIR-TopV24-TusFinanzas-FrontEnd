@@ -28,12 +28,16 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
   return (
     <>
     <SelectCategory 
+    type={type}
     handle={handleCategoryModal}
     visible={category}
     handleSelectSubCategory={handleSelectSubCategory}
     />
       <div
-        onClick={() => handle(false)}
+        onClick={() => {
+          setObjTransaccion({ name:"Seleccionar Categoria" })
+          handle(false)
+        }}
         className={`${styles.containerOpacity} ${
           visible.title ? styles.containerOpacityVisible : null
         }`}
@@ -61,6 +65,7 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 <Image 
                 width={50}
                 height={50}
+                alt={objTransaccion.name}
                 src={ objTransaccion.img ? objTransaccion.img : imgPlaceHolder }
                 />
                 <input
@@ -69,7 +74,7 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 id="categories"
                 type="text"
                 placeholder="Seleccionar Categoria"
-                value={objTransaccion.name}
+                value={objTransaccion.name === undefined ? "Seleccionar Categoria" : objTransaccion.name}
                 {...register("categories", {
                   required: true,
 
@@ -120,7 +125,10 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
             <div className={styles.containerBtnForm}>
               <button
                 type="button"
-                onClick={() => handle(false)}
+                onClick={() => {
+                  setObjTransaccion({})
+                  handle(false)
+                }}
                 className={`${styles.btnCancelForm} ${
                   color === "Green"
                     ? styles.btnCancelGreen
