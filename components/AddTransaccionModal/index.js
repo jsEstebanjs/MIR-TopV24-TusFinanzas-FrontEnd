@@ -8,23 +8,37 @@ import { useState } from "react";
 function AddTransaccionModal({ color, type, title, visible, handle }) {
   const [category, setCategory] = useState(false);
   const [objTransaccion, setObjTransaccion] = useState({});
+  const [verifyCategory , setVerifiCategory] = useState(false)
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  //para cuando demos guadar 
-  const SubmitForm = async (data) => {};
+  const SubmitForm = async (data) => {
+    if(objTransaccion.name === "Seleccionar Categoria" || objTransaccion.name === undefined){
+      setVerifiCategory(true)
+      return
+    }else{
+      setVerifiCategory(false)
+    }
+    const { img, name, id } = objTransaccion;
+    reset({ amount: "", name: "", description: "" });
+    setObjTransaccion({ name: "Seleccionar Categoria" });
+  };
 
   const handleCategoryModal = () => {
     setCategory(!category);
   };
-  //ya se esta guardando gracias al form solo debo agregar eso al enviar
+
+
   const handleSelectSubCategory = (img, name, id) => {
     setObjTransaccion({ ...objTransaccion, img, name });
+    
   };
+
 
 
   return (
@@ -39,6 +53,11 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
         onClick={() => {
           setObjTransaccion({ name: "Seleccionar Categoria" });
           handle(false);
+          reset({
+            amount: "",
+            name: "",
+            description: "",
+          });
         }}
         className={`${styles.containerOpacity} ${
           visible.title ? styles.containerOpacityVisible : null
@@ -75,6 +94,7 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                   className={styles.inputCategories}
                   id="categories"
                   type="text"
+                  readOnly
                   placeholder="Seleccionar Categoria"
                   value={
                     objTransaccion.name === undefined
@@ -86,9 +106,9 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                   })}
                 />
               </div>
-
+              {verifyCategory ? <p className={styles.errorInfoForm}>Escoge una Categoria</p> : null}
               {errors.categories?.type === "required" && (
-                <p className={styles.errorP}>Escoge una Categoria</p>
+                <p className={styles.errorInfoForm}>Escoge una Categoria</p>
               )}
             </div>
             <div className={styles.containerLabelAndInputFormAuth}>
@@ -98,18 +118,18 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 type="number"
                 {...register("amount", {
                   required: true,
-                  min: 1,
+                  min: 1000,
                   pattern: /^[0-9]/,
                 })}
               />
               {errors.amount?.type === "required" && (
-                <p className={styles.errorP}>Ingresa un valor</p>
+                <p className={styles.errorInfoForm}>Ingresa un valor</p>
               )}
               {errors.amount?.type === "min" && (
-                <p className={styles.errorP}>El valor minimo es 1</p>
+                <p className={styles.errorInfoForm}>El valor minimo es 1000</p>
               )}
               {errors.amount?.type === "pattern" && (
-                <p className={styles.errorP}>Solo se admiten numeros</p>
+                <p className={styles.errorInfoForm}>Solo se admiten numeros</p>
               )}
             </div>
             <div className={styles.containerLabelAndInputFormAuth}>
@@ -131,6 +151,11 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
               <button
                 type="button"
                 onClick={() => {
+                  reset({
+                    amount: "",
+                    name: "",
+                    description: "",
+                  });
                   setObjTransaccion({});
                   handle(false);
                 }}

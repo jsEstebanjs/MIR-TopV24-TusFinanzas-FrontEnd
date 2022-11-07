@@ -51,6 +51,9 @@
                 display: flex;
                 flex-direction: column;
                 margin: 10px 0;
+                .errorInfoForm{
+                    color: $Red;
+                }
                 .containerImgAndCategory{
                     display: flex;
                     flex-direction: row;
