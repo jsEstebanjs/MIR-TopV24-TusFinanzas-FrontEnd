@@ -4,11 +4,17 @@ import SelectCategory from "./SelectCategory";
 import Image from "next/image";
 import imgPlaceHolder from "./imagen.png";
 import { useState } from "react";
+import { createTransaccion } from "../../utils/createTransaccion";
+import { useDispatch } from "react-redux";
+import { pushTransactionsIds } from "../../store/user.Slice";
+import { Ring } from "@uiball/loaders";
 
 function AddTransaccionModal({ color, type, title, visible, handle }) {
   const [category, setCategory] = useState(false);
   const [objTransaccion, setObjTransaccion] = useState({});
-  const [verifyCategory , setVerifiCategory] = useState(false)
+  const [verifyCategory, setVerifiCategory] = useState(false);
+  const [loader,setLoader] = useState(false)
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -18,28 +24,33 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
   } = useForm();
 
   const SubmitForm = async (data) => {
-    if(objTransaccion.name === "Seleccionar Categoria" || objTransaccion.name === undefined){
-      setVerifiCategory(true)
-      return
-    }else{
-      setVerifiCategory(false)
+    setLoader(true)
+    if (
+      objTransaccion.name === "Seleccionar Categoria" ||
+      objTransaccion.name === undefined
+    ) {
+      setVerifiCategory(true);
+      return;
+    } else {
+      setVerifiCategory(false);
     }
     const { img, name, id } = objTransaccion;
-    reset({ amount: "", name: "", description: "" });
-    setObjTransaccion({ name: "Seleccionar Categoria" });
+    data.amount = Math.abs(data.amount);
+    const body = { ...data, subcategoryId: id, categories: name };
+    const res = await createTransaccion(body);
+    dispatch(pushTransactionsIds(res.data.data));
+    setLoader(false)
+    // reset({ amount: "", name: "", description: "" });
+    // setObjTransaccion({ name: "Seleccionar Categoria" });
   };
 
   const handleCategoryModal = () => {
     setCategory(!category);
   };
 
-
   const handleSelectSubCategory = (img, name, id) => {
-    setObjTransaccion({ ...objTransaccion, img, name });
-    
+    setObjTransaccion({ ...objTransaccion, img, name, id });
   };
-
-
 
   return (
     <>
@@ -68,6 +79,11 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
           visible.title ? styles.mainContainerAddTransaccionModaVisible : null
         }`}
       >
+        {loader ? (
+          <div className={styles.containerLoader}>
+            <Ring size={35} color="#050505" />
+          </div>
+        ) : null}
         <h2
           className={`${styles.titleContainerAddTransaccionModal} ${
             color === "Green" ? styles.colorGreen : styles.colorRed
@@ -106,7 +122,9 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                   })}
                 />
               </div>
-              {verifyCategory ? <p className={styles.errorInfoForm}>Escoge una Categoria</p> : null}
+              {verifyCategory ? (
+                <p className={styles.errorInfoForm}>Escoge una Categoria</p>
+              ) : null}
               {errors.categories?.type === "required" && (
                 <p className={styles.errorInfoForm}>Escoge una Categoria</p>
               )}
