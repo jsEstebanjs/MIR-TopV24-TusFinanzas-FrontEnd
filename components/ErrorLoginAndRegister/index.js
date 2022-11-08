@@ -16,6 +16,7 @@ function ErrorLoginAndRegister({errorMessage,active,handle}){
             width={50}
             height={50}
             src={cancelar}
+            alt={"error"}
             />
             <p className={styles.errorMessage}>{errorMessage}</p>
         </div>

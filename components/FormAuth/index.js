@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import styles from "./index.module.scss";
-import { loginAndRegister } from '../../utils/loginAndRegister';
+import { loginAndRegister } from "../../utils/loginAndRegister";
 import ErrorLoginAndRegister from "../ErrorLoginAndRegister";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { Ring } from "@uiball/loaders";
 
-function FormAuth({ btn, isName,url }) {
-
-  const [error,setError] = useState("")
+function FormAuth({ btn, isName, url }) {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const {
     register,
@@ -14,23 +17,34 @@ function FormAuth({ btn, isName,url }) {
     formState: { errors },
   } = useForm();
 
-  const handleErrorModal=(message)=>{
-    setError(message)
-  }
+  const handleErrorModal = (message) => {
+    setError(message);
+  };
 
-  const SubmitForm = async(data) => {
-    const result = await loginAndRegister(url,data);
-    if(result.response.status !== 400){
-      localStorage.setItem("token", result.data.data.token)
-    }else{
-      handleErrorModal(result.response.data.data)
+  const SubmitForm = async (data) => {
+    setLoader(true);
+    const result = await loginAndRegister(url, data);
+    if (result instanceof Object) {
+      localStorage.setItem("token", result.data.data.token);
+      router.push("/");
+    } else {
+      handleErrorModal(result);
     }
- 
+    setLoader(false);
   };
 
   return (
     <div className={styles.mainContainerFormAuth}>
-       <ErrorLoginAndRegister handle={handleErrorModal} errorMessage={error} active={error}/> 
+      {loader ? (
+        <div className={styles.containerLoader}>
+          <Ring size={35} color="#050505" />
+        </div>
+      ) : null}
+      <ErrorLoginAndRegister
+        handle={handleErrorModal}
+        errorMessage={error}
+        active={error}
+      />
       <form
         className={styles.containerFormAuth}
         onSubmit={handleSubmit(SubmitForm)}
@@ -80,7 +94,9 @@ function FormAuth({ btn, isName,url }) {
           {errors.email?.type === "required" && (
             <p className={styles.errorP}>El campo del Email es requerido</p>
           )}
-          {errors.email?.type === "pattern" && <p className={styles.errorP}>El email no es valido</p>}
+          {errors.email?.type === "pattern" && (
+            <p className={styles.errorP}>El email no es valido</p>
+          )}
         </div>
 
         <div className={styles.containerLabelAndInputFormAuth}>
