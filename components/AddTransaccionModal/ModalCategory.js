@@ -1,7 +1,6 @@
 import styles from "./ModalCategory.module.scss";
 import Image from "next/image";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import imgPlaceHolder from "./imagen.png";
 import ModalSubCategory from "./ModalSubCategory";
 import { useState } from "react";
 
@@ -31,6 +30,8 @@ function ModalCategory({ src, name, id, func,sub,handleSelectSubCategory }) {
       >{
         sub.map((item)=>(
             <ModalSubCategory 
+            id={item._id}
+            key={item._id}
             src={item.favicon} 
             title={item.name}
             handleSelectSubCategory={handleSelectSubCategory}

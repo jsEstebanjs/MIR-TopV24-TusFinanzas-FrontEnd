@@ -9,6 +9,17 @@
     border-radius: 20px;
     width: 100%;
     max-width: 500px;
+    .containerLoader{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .containerFormAuth{
         display: flex;
         flex-direction: column;
