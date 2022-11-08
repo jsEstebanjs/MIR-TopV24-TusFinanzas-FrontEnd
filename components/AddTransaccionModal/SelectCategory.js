@@ -1,8 +1,9 @@
 import styles from "./SelectCategory.module.scss";
 import ModalCategory from "./ModalCategory";
-import { categories } from "./constands";
+import { useSelector } from "react-redux";
 
 function SelectCategory({ handle, visible, handleSelectSubCategory, type }) {
+  const categories = useSelector((state) => state.UserSlice.categoriesIds);
   return (
     <>
       <div
@@ -24,13 +25,15 @@ function SelectCategory({ handle, visible, handleSelectSubCategory, type }) {
             if (item.type === type) {
               return (
                 <ModalCategory
+                  id={item._id}
+                  key={item._id}
                   handleSelectSubCategory={handleSelectSubCategory}
                   func={handle}
                   src={item.favicon}
                   name={item.name}
-                  sub={item.subcategories}
+                  sub={item.subcategoriesIds}
                 />
-              )
+              );
             }
           })}
         </div>

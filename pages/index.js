@@ -8,7 +8,7 @@ import ChartOfAccounts from "../components/ChartOfAccounts";
 import BalanceCard from "../components/BalanceCard";
 import CardTransaccions from "../components/CardTransaccions";
 import AddTransaccionModal from "../components/AddTransaccionModal";
-import { categories } from "../components/AddTransaccionModal/constands";
+
 
 export default function Home() {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
