@@ -4,7 +4,7 @@ import Image from "next/image";
 function ModalSubCategory({ src, title, id, handleSelectSubCategory }) {
   return (
     <div
-      onClick={() => handleSelectSubCategory(src, title)}
+      onClick={() => handleSelectSubCategory(src, title,id)}
       className={styles.mainContainerModalSubCategory}
     >
       <Image height={40} width={40} src={src} alt={title} />

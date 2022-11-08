@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 function SelectCategory({ handle, visible, handleSelectSubCategory, type }) {
   const categories = useSelector((state) => state.UserSlice.categoriesIds);
+
   return (
     <>
       <div

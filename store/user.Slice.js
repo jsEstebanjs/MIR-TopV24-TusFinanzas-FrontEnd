@@ -18,9 +18,13 @@ export const userSlice = createSlice({
         ...action.payload,
       };
     },
+    pushTransactionsIds:(state,action)=>{
+      state.transactionsIds.push(action.payload);
+        
+    }
   },
 });
 
-export const { setInitialState } = userSlice.actions;
+export const { setInitialState, pushTransactionsIds } = userSlice.actions;
 
 export default userSlice.reducer;
