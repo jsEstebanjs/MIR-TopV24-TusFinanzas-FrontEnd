@@ -10,7 +10,7 @@ export const createTransaccion = async(body) => {
         return res
     }
     catch(err){
-        return err
+        return err.response.data.error
     }
 
 }

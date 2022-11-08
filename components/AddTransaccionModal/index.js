@@ -8,12 +8,14 @@ import { createTransaccion } from "../../utils/createTransaccion";
 import { useDispatch } from "react-redux";
 import { pushTransactionsIds } from "../../store/user.Slice";
 import { Ring } from "@uiball/loaders";
+import  ErrorLoginAndRegister  from "../ErrorLoginAndRegister";
 
 function AddTransaccionModal({ color, type, title, visible, handle }) {
   const [category, setCategory] = useState(false);
   const [objTransaccion, setObjTransaccion] = useState({});
   const [verifyCategory, setVerifiCategory] = useState(false);
-  const [loader,setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [verifyTransaccion, setVerifyTransaccion] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -24,7 +26,6 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
   } = useForm();
 
   const SubmitForm = async (data) => {
-    setLoader(true)
     if (
       objTransaccion.name === "Seleccionar Categoria" ||
       objTransaccion.name === undefined
@@ -32,16 +33,22 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
       setVerifiCategory(true);
       return;
     } else {
+      setLoader(true);
       setVerifiCategory(false);
     }
-    const { img, name, id } = objTransaccion;
+    const { id } = objTransaccion;
     data.amount = Math.abs(data.amount);
-    const body = { ...data, subcategoryId: id, categories: name };
+    const body = { ...data, subcategoryId: id };
     const res = await createTransaccion(body);
-    dispatch(pushTransactionsIds(res.data.data));
-    setLoader(false)
-    // reset({ amount: "", name: "", description: "" });
-    // setObjTransaccion({ name: "Seleccionar Categoria" });
+    if (res instanceof Object) {
+      dispatch(pushTransactionsIds(res.data.data));
+      reset({ amount: "", name: "", description: "" });
+      setObjTransaccion({ name: "Seleccionar Categoria" });
+      handle(false)
+    } else {
+      setVerifyTransaccion(res)
+    }
+    setLoader(false);
   };
 
   const handleCategoryModal = () => {
@@ -51,9 +58,16 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
   const handleSelectSubCategory = (img, name, id) => {
     setObjTransaccion({ ...objTransaccion, img, name, id });
   };
-
+  const handleVerifyTransaccion = ()=>{
+    setVerifyTransaccion(false)
+  }
   return (
     <>
+        <ErrorLoginAndRegister
+          errorMessage={verifyTransaccion}
+          active={verifyTransaccion}
+          handle={handleVerifyTransaccion}
+        />
       <SelectCategory
         type={type}
         handle={handleCategoryModal}
@@ -150,17 +164,6 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 <p className={styles.errorInfoForm}>Solo se admiten numeros</p>
               )}
             </div>
-            <div className={styles.containerLabelAndInputFormAuth}>
-              <label htmlFor="name">De (Opcional)</label>
-              <input
-                id="name"
-                type="text"
-                {...register("name", {
-                  required: false,
-                })}
-              />
-            </div>
-
             <div className={styles.containerLabelAndInputFormAuth}>
               <label htmlFor="description">Notas (Opcional)</label>
               <textarea id="description" {...register("description")} />
