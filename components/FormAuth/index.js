@@ -27,6 +27,7 @@ function FormAuth({ btn, isName, url }) {
     if (result instanceof Object) {
       localStorage.setItem("token", result.data.data.token);
       router.push("/");
+      // window.location.href = "http://localhost:3000/" 
     } else {
       handleErrorModal(result);
     }
