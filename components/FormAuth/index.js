@@ -5,11 +5,15 @@ import ErrorLoginAndRegister from "../ErrorLoginAndRegister";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Ring } from "@uiball/loaders";
+import { useDispatch } from "react-redux";
+import { setInitialState } from "../../store/user.Slice";
 
 function FormAuth({ btn, isName, url }) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
+
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -25,9 +29,9 @@ function FormAuth({ btn, isName, url }) {
     setLoader(true);
     const result = await loginAndRegister(url, data);
     if (result instanceof Object) {
+      dispatch(setInitialState(result.data.data.user));
       localStorage.setItem("token", result.data.data.token);
       router.push("/");
-      // window.location.href = "http://localhost:3000/" 
     } else {
       handleErrorModal(result);
     }
