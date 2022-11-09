@@ -2,10 +2,39 @@ import "../styles/base/globals.css";
 import Head from "next/head";
 import { store } from "../store/store";
 import { Provider } from "react-redux";
-import VerifyToken from "../components/VerifyToken";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import LoadingLanding from "../components/LoadingLading";
+import { validateToken } from "../utils/valideToken";
+import { setInitialState } from "../store/user.Slice";
 
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const [loading, setLoader] = useState(true);
+  
+  useEffect(() => {
+    async function auth() {
+      if (!localStorage.getItem("token")) {
+        await router.push("/login");
+        setLoader(false);
+      } else {
+        const res = await validateToken();
+        if (!res) {
+          localStorage.removeItem("token");
+          await router.push("/login");
+        } else {
+          store.dispatch(setInitialState(res.data.data))
+        }
+        setLoader(false);
+      }
+    }
+
+    if(pageProps?.private) auth();
+    else setLoader(false);
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,8 +43,7 @@ function MyApp({ Component, pageProps }) {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <Provider store={store}>
-        <VerifyToken />
-        <Component {...pageProps} />
+        {loading ? <LoadingLanding /> : <Component {...pageProps} />}
       </Provider>
     </>
   );

@@ -125,3 +125,11 @@ export default function Home() {
     </div>
   );
 }
+
+export function getStaticProps(context) {
+  return {
+    props: {
+      private: true
+    }
+  };
+}
