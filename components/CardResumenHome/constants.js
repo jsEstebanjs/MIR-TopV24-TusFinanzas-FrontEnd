@@ -1,8 +1,8 @@
-export const donutData = {
+export const donutDataDefault = {
     labels: [],
     datasets: [
       {
-        data: [0, 0, 10],
+        data: [0, 0, 100],
         backgroundColor: [
           "#117D10",
           "#F44236",

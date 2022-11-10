@@ -116,7 +116,7 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
                 <Image
                   width={50}
                   height={50}
-                  alt={objTransaccion.name}
+                  alt={objTransaccion.name || "img-placeHolder"}
                   src={objTransaccion.img ? objTransaccion.img : imgPlaceHolder}
                 />
                 <input
