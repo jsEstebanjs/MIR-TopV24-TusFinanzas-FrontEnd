@@ -1,20 +1,40 @@
 import styles from "../styles/pages/Home.module.scss";
 import { FaBars } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HamburguerMainHome from "../components/HamburguerMainHome";
 import CardResumenHome from "../components/CardResumenHome";
 import ChartOfAccounts from "../components/ChartOfAccounts";
 import BalanceCard from "../components/BalanceCard";
 import CardTransaccions from "../components/CardTransaccions";
 import AddTransaccionModal from "../components/AddTransaccionModal";
-
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { pushDocs } from "../store/transaccions.Slice";
 
 export default function Home() {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
   const [visibleHamburguer, setVisibleHamburguer] = useState(false);
   const [visibleTransaccion, setVisibleTransaccion] = useState(false);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    async function lastTransaccions() {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/transactions?limit=10&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      dispatch(pushDocs(res.data.data.docs));
+    }
+    if(localStorage.getItem("token")){
+      lastTransaccions();
+    }
+  }, []);
   const handleClickAddTransaccion = () => {
     setVisibleTransaccionBtn(!visibleTransaccionBtn);
   };
@@ -63,7 +83,7 @@ export default function Home() {
         </div>
         <div className={styles.mainContainerVisionGeneralTwo}>
           <CardResumenHome />
-          <ChartOfAccounts amount={700000} latest={"11/03/2022"} />
+          <ChartOfAccounts />
           <BalanceCard amount={700000} />
           <CardTransaccions />
         </div>
@@ -126,10 +146,10 @@ export default function Home() {
   );
 }
 
-export function getStaticProps(context) {
+export async function getStaticProps(context) {
   return {
     props: {
-      private: true
-    }
+      private: true,
+    },
   };
 }

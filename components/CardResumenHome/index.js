@@ -1,16 +1,59 @@
 import styles from "./index.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { donutData } from './constants';
+import { donutDataDefault } from "./constants";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function CardResumenHome() {
+  const mouths = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
+  const lastTransaction = useSelector(
+    (state) => state.TransaccionsSlice.docs[0]
+  );
+  const [donutData, setDonutData] = useState(donutDataDefault);
+
+  useEffect(() => {
+    if (lastTransaction) {
+      setDonutData({
+        ...donutDataDefault,
+        datasets: [
+          {
+            ...donutDataDefault.datasets[0],
+            data: [lastTransaction?.todoEntry, lastTransaction?.todoExpense, 0],
+          },
+        ],
+      });
+    }
+  }, [lastTransaction]);
+
+  const transactionDate = lastTransaction?.createdAt
+    ? new Date(lastTransaction.createdAt)
+    : null;
 
   return (
     <div className={styles.mainContainerCardResumen}>
       <h2 className={styles.mainContainerCardTitle}>Resumen</h2>
-      <h3 className={styles.mainContainerCardMonth}>Noviembre 2022</h3>
+      <h3 className={styles.mainContainerCardMonth}>
+        {!transactionDate
+          ? "Ninguna"
+          : `${mouths[transactionDate.getMonth()]
+            } ${transactionDate.getFullYear()}`}
+      </h3>
       <div className={styles.mainContainerCardEntryAndSpent}>
         <div className={styles.containerChartCardResumen}>
           <Doughnut
@@ -27,9 +70,15 @@ function CardResumenHome() {
             <p>Total: </p>
           </div>
           <div>
-            <p className={styles.pInfoCardEntry}>$0.00</p>
-            <p className={styles.pInfoCardSpent}>$0.00</p>
-            <p className={styles.pInfoResult}>$0.00</p>
+            <p className={styles.pInfoCardEntry}>
+              {!transactionDate ? "$0.00" : lastTransaction.todoEntry}
+            </p>
+            <p className={styles.pInfoCardSpent}>
+              {!transactionDate ? "$0.00" : lastTransaction.todoExpense}
+            </p>
+            <p className={styles.pInfoResult}>
+              {!transactionDate ? "$0.00" : lastTransaction.balance}
+            </p>
           </div>
         </div>
       </div>

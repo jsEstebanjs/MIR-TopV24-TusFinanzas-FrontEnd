@@ -3,7 +3,7 @@
 .mainContainerCardTransaccions{
     width: 100%;
     max-width: 400px;
-    height: max-content;
+    height: 275px;
     min-height: 100px;
     background-color: $Light-Black;
     display: flex;
@@ -12,6 +12,21 @@
     padding: 10px;
     margin-bottom: 10px;
     color: $White;
+    ::-webkit-scrollbar {
+        width: 5px;          
+    }
+      
+    ::-webkit-scrollbar-track {
+        background:$White; 
+        border-radius: 20px;
+        margin-left: 5px;  
+    }
+      
+    ::-webkit-scrollbar-thumb {
+        background-color: rgb(22, 21, 21);    
+        border-radius: 20px;       
+
+    }
     .titleContainerCardTransaccions{
         text-align: center;
         font-weight: 500;
@@ -20,5 +35,18 @@
     .containerModalTransaccions{
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
     }
+}
+@media(max-width:900px){
+    .mainContainerCardTransaccions{
+        height: max-content;
+        .containerModalTransaccions{
+            display: flex;
+            flex-direction: column;
+            height: max-content;
+            overflow-y: initial;
+        }
+    }
+
 }
