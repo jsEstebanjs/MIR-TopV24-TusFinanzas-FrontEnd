@@ -16,7 +16,7 @@ function ChartOfAccounts({ amount, latest }) {
       </div>
       <p>
         Ultima vez usado:
-        { date2 === false ? " Ninguno" : ` ${date2.getMonth() + 1}/${date2.getDate()}/${date2.getFullYear()}`}
+        { date2 === false ? " Ninguno" : ` ${date2.getDate()}/${date2.getMonth() + 1}/${date2.getFullYear()}`}
       </p>
     </div>
   );
