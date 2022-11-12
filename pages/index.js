@@ -11,6 +11,7 @@ import AddTransaccionModal from "../components/AddTransaccionModal";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { pushDocs } from "../store/transaccions.Slice";
+import UserLogOut from "../components/UserLogOut";
 
 export default function Home() {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
@@ -73,6 +74,7 @@ export default function Home() {
       />
       <div className={styles.mainContainerNavVisionGeneral}>
         <div className={styles.containerNavVisionGeneral}>
+          <div className={styles.containerIconAndTitle}>
           <span
             onClick={handleClickHamburguer}
             className={styles.NavVisionGeneralIconBars}
@@ -80,11 +82,14 @@ export default function Home() {
             <FaBars />
           </span>
           <h1 className={styles.NavVisionGeneralTitle}>Vista General</h1>
+          </div>
+          <UserLogOut />
+  
         </div>
         <div className={styles.mainContainerVisionGeneralTwo}>
           <CardResumenHome />
           <ChartOfAccounts />
-          <BalanceCard amount={700000} />
+          <BalanceCard  />
           <CardTransaccions />
         </div>
       </div>
