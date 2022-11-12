@@ -27,7 +27,7 @@ function ModalTransaccions({ amount, date, category, wallet, type , img }) {
             ${type === "Expense" ? "-" : null}
             {amount}
           </p>
-          <p>{`${date2.getMonth() + 1}/${date2.getDate()}/${date2.getFullYear()}`}</p>
+          <p>{`${date2.getDate()}/${date2.getMonth() + 1}/${date2.getFullYear()}`}</p>
         </div>
       </div>
     </div>
