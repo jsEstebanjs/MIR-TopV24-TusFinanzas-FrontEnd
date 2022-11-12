@@ -84,7 +84,7 @@ export default function Home() {
         <div className={styles.mainContainerVisionGeneralTwo}>
           <CardResumenHome />
           <ChartOfAccounts />
-          <BalanceCard amount={700000} />
+          <BalanceCard  />
           <CardTransaccions />
         </div>
       </div>

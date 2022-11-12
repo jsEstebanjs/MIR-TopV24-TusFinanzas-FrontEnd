@@ -38,6 +38,8 @@ function CardResumenHome() {
           },
         ],
       });
+    }else{
+      setDonutData(donutDataDefault)
     }
   }, [lastTransaction]);
 

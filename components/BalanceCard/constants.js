@@ -9,14 +9,12 @@ export const options = {
     borderWidth: 2,
   };
   
-  const labels = ['03/22', '05/22', '06/22', '08/22', '09/22'];
-  
   export const balanceData = {
-    labels,
+    labels:['03/22', '05/22', '06/22', '08/22', '09/22'],
     datasets: [
       {
         fill: true,
-        data: labels.map(() => Math.floor(Math.random() * 200))
+        data: [400,500,400,300]
         ,
         borderColor: '#F9F9F9',
         backgroundColor: '#1976D3',
