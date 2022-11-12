@@ -10,11 +10,11 @@ export const options = {
   };
   
   export const balanceData = {
-    labels:['03/22', '05/22', '06/22', '08/22', '09/22'],
+    labels:[],
     datasets: [
       {
         fill: true,
-        data: [400,500,400,300]
+        data: []
         ,
         borderColor: '#F9F9F9',
         backgroundColor: '#1976D3',

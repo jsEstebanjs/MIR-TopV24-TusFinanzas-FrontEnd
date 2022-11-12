@@ -37,7 +37,6 @@ function BalanceCard() {
           },
         }
       );
-      console.log(res.data.data)
       const months = []
       const balanceMonths = []
       for(let i = 0 ; i < res.data.data.length;i++){ 
@@ -55,7 +54,9 @@ function BalanceCard() {
         ]
       })
     }
-    lastTransactions();
+    if(localStorage.getItem("token")){
+      lastTransactions();
+    }
   }, []);
 
   return (

@@ -20,8 +20,13 @@
     padding: 15px;
     color: $White;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     background-color: $Main-Blue;
+    .containerIconAndTitle{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 }
 .mainContainerVisionGeneralTwo{
     display: flex;
