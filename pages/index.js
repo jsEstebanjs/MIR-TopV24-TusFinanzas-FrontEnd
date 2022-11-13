@@ -9,7 +9,7 @@ import BalanceCard from "../components/BalanceCard";
 import CardTransaccions from "../components/CardTransaccions";
 import AddTransaccionModal from "../components/AddTransaccionModal";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { pushDocs } from "../store/transaccions.Slice";
 import UserLogOut from "../components/UserLogOut";
 
@@ -18,6 +18,7 @@ export default function Home() {
   const [visibleHamburguer, setVisibleHamburguer] = useState(false);
   const [visibleTransaccion, setVisibleTransaccion] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state)=> state.UserSlice)
 
   useEffect(() => {
     async function lastTransaccions() {
@@ -35,7 +36,7 @@ export default function Home() {
     if(localStorage.getItem("token")){
       lastTransaccions();
     }
-  }, []);
+  }, [user.transactionsIds]);
   const handleClickAddTransaccion = () => {
     setVisibleTransaccionBtn(!visibleTransaccionBtn);
   };

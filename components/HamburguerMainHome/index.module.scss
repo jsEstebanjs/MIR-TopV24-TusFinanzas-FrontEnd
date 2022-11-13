@@ -42,6 +42,18 @@
         width: 100%;
         height: calc(100% - 62px);
         background-color: $Light-Black;
+        padding: 10px;
+        .linkHamburguerMenu{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: $White;
+            font-size: 18px;
+            svg{
+                font-size: 20px;
+
+            }
+        }
     }
 }
 .mainContainerHamburguerHomeMove{

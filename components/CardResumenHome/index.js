@@ -4,6 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { donutDataDefault } from "./constants";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { formatterPeso } from '../../utils/formatterPeso';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -73,13 +74,13 @@ function CardResumenHome() {
           </div>
           <div>
             <p className={styles.pInfoCardEntry}>
-              {!transactionDate ? "$0.00" : lastTransaction.todoEntry}
+              {!transactionDate ? "$0.00" : formatterPeso.format(lastTransaction.todoEntry)}
             </p>
             <p className={styles.pInfoCardSpent}>
-              {!transactionDate ? "$0.00" : lastTransaction.todoExpense}
+              {!transactionDate ? "$0.00" : formatterPeso.format(lastTransaction.todoExpense)}
             </p>
             <p className={styles.pInfoResult}>
-              {!transactionDate ? "$0.00" : lastTransaction.balance}
+              {!transactionDate ? "$0.00" :formatterPeso.format(lastTransaction.balance)}
             </p>
           </div>
         </div>

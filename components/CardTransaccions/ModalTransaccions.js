@@ -1,5 +1,6 @@
 import styles from "./ModalTransaccions.module.scss";
 import Image from "next/image";
+import { formatterPeso } from '../../utils/formatterPeso';
 
 function ModalTransaccions({ amount, date, category, wallet, type , img }) {
   const date2 = new Date(date)
@@ -24,8 +25,8 @@ function ModalTransaccions({ amount, date, category, wallet, type , img }) {
         </div>
         <div>
           <p className={styles.infoPAmount}>
-            ${type === "Expense" ? "-" : null}
-            {amount}
+            {type === "Expense" ? "-" : null}
+            {formatterPeso.format(amount)}
           </p>
           <p>{`${date2.getDate()}/${date2.getMonth() + 1}/${date2.getFullYear()}`}</p>
         </div>
