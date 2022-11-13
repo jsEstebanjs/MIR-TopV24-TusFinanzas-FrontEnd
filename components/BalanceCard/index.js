@@ -14,6 +14,8 @@ import { Line } from "react-chartjs-2";
 import { options, balanceData } from "./constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { formatterPeso } from '../../utils/formatterPeso';
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +29,7 @@ ChartJS.register(
 );
 function BalanceCard() {
   const [lastTransactions, setLastTransactions] = useState(balanceData);
+  const user = useSelector((state)=> state.UserSlice)
   useEffect(() => {
     async function lastTransactions() {
       const res = await axios.get(
@@ -57,7 +60,7 @@ function BalanceCard() {
     if(localStorage.getItem("token")){
       lastTransactions();
     }
-  }, []);
+  }, [user.transactionsIds]);
 
   return (
     <div className={styles.mainContainerBalanceCard}>
@@ -65,7 +68,7 @@ function BalanceCard() {
       <div className={styles.containerAmountBalanceCard}>
         <p>Cantidad total que posee:</p>
         <p className={styles.pAmountBalanceCard}>
-          ${lastTransactions.labels.length > 0 ? lastTransactions.datasets[0].data[0] : 0}
+          {lastTransactions.labels.length > 0 ? formatterPeso.format(lastTransactions.datasets[0].data[0]) : `$ ${0}`}
         </p>
       </div>
       <div className={styles.containerChartBalance}>
