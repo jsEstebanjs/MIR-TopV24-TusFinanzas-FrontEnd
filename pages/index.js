@@ -1,24 +1,16 @@
-import styles from "../styles/pages/Home.module.scss";
-import { FaBars } from "react-icons/fa";
-import { MdAdd, MdRemove } from "react-icons/md";
-import { useEffect, useState } from "react";
-import HamburguerMainHome from "../components/HamburguerMainHome";
+import { useEffect } from "react";
 import CardResumenHome from "../components/CardResumenHome";
 import ChartOfAccounts from "../components/ChartOfAccounts";
 import BalanceCard from "../components/BalanceCard";
 import CardTransaccions from "../components/CardTransaccions";
-import AddTransaccionModal from "../components/AddTransaccionModal";
 import axios from "axios";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { pushDocs } from "../store/transaccions.Slice";
-import UserLogOut from "../components/UserLogOut";
+import Layout from "../components/Layout";
 
 export default function Home() {
-  const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
-  const [visibleHamburguer, setVisibleHamburguer] = useState(false);
-  const [visibleTransaccion, setVisibleTransaccion] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state)=> state.UserSlice)
+  const user = useSelector((state) => state.UserSlice);
 
   useEffect(() => {
     async function lastTransaccions() {
@@ -33,122 +25,18 @@ export default function Home() {
 
       dispatch(pushDocs(res.data.data.docs));
     }
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       lastTransaccions();
     }
   }, [user.transactionsIds]);
-  const handleClickAddTransaccion = () => {
-    setVisibleTransaccionBtn(!visibleTransaccionBtn);
-  };
-
-  const handleClickHamburguer = () => {
-    if (window.innerWidth < 1200) {
-      setVisibleHamburguer(!visibleHamburguer);
-      if (!visibleHamburguer) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style = "initial";
-      }
-    }
-  };
-
-  const handleTransaccion = (title, color, type) => {
-    if (title) {
-      setVisibleTransaccion({ title, color, type });
-    } else {
-      setVisibleTransaccion(false);
-    }
-  };
 
   return (
-    <div className={styles.mainContainerVisionGeneral}>
-      <HamburguerMainHome
-        visibleVar={visibleHamburguer}
-        handleVisible={handleClickHamburguer}
-      />
-      <AddTransaccionModal
-        color={visibleTransaccion.color}
-        type={visibleTransaccion.type}
-        title={visibleTransaccion.title}
-        visible={visibleTransaccion}
-        handle={handleTransaccion}
-      />
-      <div className={styles.mainContainerNavVisionGeneral}>
-        <div className={styles.containerNavVisionGeneral}>
-          <div className={styles.containerIconAndTitle}>
-          <span
-            onClick={handleClickHamburguer}
-            className={styles.NavVisionGeneralIconBars}
-          >
-            <FaBars />
-          </span>
-          <h1 className={styles.NavVisionGeneralTitle}>Vista General</h1>
-          </div>
-          <UserLogOut />
-  
-        </div>
-        <div className={styles.mainContainerVisionGeneralTwo}>
-          <CardResumenHome />
-          <ChartOfAccounts />
-          <BalanceCard  />
-          <CardTransaccions />
-        </div>
-      </div>
-
-      {/* aqui van los btn de entry and spent */}
-      <div
-        onClick={handleClickAddTransaccion}
-        className={styles.containerBtnAddTransaccion}
-      >
-        <p
-          className={`${styles.infoPTransaccionDesktop} ${
-            visibleTransaccionBtn ? styles.infoPTransaccionDesktopNoView : null
-          }`}
-        >
-          Agregar Transaccion
-        </p>
-        <span className={styles.btnAddTransaccion}>
-          <MdAdd
-            className={visibleTransaccionBtn ? styles.svgAddRotate : null}
-          />
-        </span>
-        <span
-          onClick={() => handleTransaccion("Gasto", "Red", "Expense")}
-          className={`${styles.btnAddTransaccion} ${
-            styles.btnAddTransaccionSpent
-          } ${
-            visibleTransaccionBtn ? styles.btnAddTransaccionSpentBottom : null
-          }`}
-        >
-          <p
-            className={`${styles.infoBtnAddTransaccion} ${
-              visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
-            }`}
-          >
-            Gasto
-          </p>
-          <MdRemove />
-        </span>
-        <span
-          onClick={() => handleTransaccion("Ingreso", "Green", "Entry")}
-          className={`${styles.btnAddTransaccion} ${
-            styles.btnAddTransaccionEntry
-          } ${
-            visibleTransaccionBtn ? styles.btnAddTransaccionEntryBottom : null
-          }`}
-        >
-          <p
-            className={`${styles.infoBtnAddTransaccion} ${
-              visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
-            }`}
-          >
-            Ingreso
-          </p>
-
-          <MdAdd />
-        </span>
-      </div>
-    </div>
+    <Layout title="Vista General">
+      <CardResumenHome />
+      <ChartOfAccounts />
+      <BalanceCard />
+      <CardTransaccions />
+    </Layout>
   );
 }
 
