@@ -49,10 +49,14 @@
             gap: 10px;
             color: $White;
             font-size: 18px;
+            padding: 10px 0;
             svg{
                 font-size: 20px;
 
             }
+        }
+        .selectLinkHamburguerMenu{
+            color: $Main-Blue;
         }
     }
 }

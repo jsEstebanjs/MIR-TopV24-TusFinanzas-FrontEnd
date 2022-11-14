@@ -1,11 +1,14 @@
 import styles from "./index.module.scss";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard,MdList } from "react-icons/md";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function HamburguerMainHome({ handleVisible, visibleVar }) {
+  const router = useRouter()
   return (
-    <div className={styles.mainContainerHamburguer} onClick={handleVisible}>
+    <div className={styles.mainContainerHamburguer} >
       <div
+      onClick={handleVisible}
         className={`${styles.containerOpacity} ${
           visibleVar ? styles.containerOpacityViwe : null
         }`}
@@ -19,9 +22,13 @@ function HamburguerMainHome({ handleVisible, visibleVar }) {
           <p>Menu</p>
         </div>
         <div className={styles.containerHamburguerHomeCategories}>
-          <Link href="/" className={styles.linkHamburguerMenu}>
+          <Link href="/" className={`${styles.linkHamburguerMenu} ${router.pathname === "/" ? styles.selectLinkHamburguerMenu : null}`}>
             <MdDashboard />
             Vista General
+          </Link>
+          <Link href="/transactions" className={`${styles.linkHamburguerMenu} ${router.pathname === "/transactions" ? styles.selectLinkHamburguerMenu : null}`}>
+            <MdList />
+            Transacciones
           </Link>
         </div>
       </div>

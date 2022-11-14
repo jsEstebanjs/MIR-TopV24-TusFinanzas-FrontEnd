@@ -7,6 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { pushDocs } from "../store/transaccions.Slice";
 import Layout from "../components/Layout";
+import styles from '../styles/pages/Home.module.scss'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -32,10 +33,12 @@ export default function Home() {
 
   return (
     <Layout title="Vista General">
-      <CardResumenHome />
-      <ChartOfAccounts />
-      <BalanceCard />
-      <CardTransaccions />
+      <main className={styles.mainContainerVisionGeneralTwo}>
+        <CardResumenHome />
+        <ChartOfAccounts />
+        <BalanceCard />
+        <CardTransaccions />
+      </main>
     </Layout>
   );
 }
