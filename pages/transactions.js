@@ -5,9 +5,11 @@ import ModalTransaccions from "../components/CardTransaccions/ModalTransaccions"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Ring } from "@uiball/loaders";
+import { useSelector } from "react-redux";
 
 function Transactions() {
   const date = new Date();
+  const user = useSelector((state) => state.UserSlice);
   const [loading,setLoading] = useState(false)
   const [dateObj, setDateObj] = useState({
     year: date.getFullYear(),
@@ -39,14 +41,13 @@ function Transactions() {
           },
         }
       );
-      console.log(res.data.data[0])
       setTransactions(res.data.data.reverse())
       setLoading(false)
     }
     if (localStorage.getItem("token")) {
       lastTransaccions();
     }
-  }, [dateObj]);
+  }, [dateObj,user.transactionsIds]);
   const anotherMonth = (type)=>{
     if(type === "left"){
       if(dateObj.month === 0){
