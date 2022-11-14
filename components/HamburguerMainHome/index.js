@@ -22,11 +22,11 @@ function HamburguerMainHome({ handleVisible, visibleVar }) {
           <p>Menu</p>
         </div>
         <div className={styles.containerHamburguerHomeCategories}>
-          <Link href="/" className={`${styles.linkHamburguerMenu} ${router.pathname === "/" ? styles.selectLinkHamburguerMenu : null}`}>
+          <Link onClick={handleVisible} href="/" className={`${styles.linkHamburguerMenu} ${router.pathname === "/" ? styles.selectLinkHamburguerMenu : null}`}>
             <MdDashboard />
             Vista General
           </Link>
-          <Link href="/transactions" className={`${styles.linkHamburguerMenu} ${router.pathname === "/transactions" ? styles.selectLinkHamburguerMenu : null}`}>
+          <Link onClick={handleVisible} href="/transactions" className={`${styles.linkHamburguerMenu} ${router.pathname === "/transactions" ? styles.selectLinkHamburguerMenu : null}`}>
             <MdList />
             Transacciones
           </Link>
