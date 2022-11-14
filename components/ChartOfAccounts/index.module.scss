@@ -1,0 +1,33 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerChartOfAccounts{
+    width: 100%;
+    min-width: 280px;
+    max-width: 400px;
+    min-height: max-content;
+    background-color: $Light-Black;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px;
+    color: $White;
+    gap: 10px;
+    margin-bottom: 10px;
+    .titleContainerChartOfAccounts{
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .containerChartAndAmount{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .pChart{
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .pAmountChart{
+            color: $Green;
+        }
+    }
+}

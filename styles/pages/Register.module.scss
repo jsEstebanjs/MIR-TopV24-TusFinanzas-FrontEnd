@@ -1,0 +1,58 @@
+@import '../abstracts/variables.scss';
+
+.mainContainerRegister{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: $Black;
+    .containerRegisterNav{
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        min-height: 62px;
+        align-items: center;
+        background-color: $Main-Blue;
+        justify-content: space-between;
+        @media(max-width:546px){
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            padding: 15px;
+
+        }
+        .titleContainerRegisterNav{
+            color: $White;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .containerBtnNav{
+            width: max-content;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            .linkNav{
+                padding: 10px;
+                width: max-content;
+                max-height: 42px;
+                color: $White;
+                background-color: $Light-Black;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+            }
+        }
+    }
+    .mainFormContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+}
