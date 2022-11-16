@@ -16,8 +16,8 @@ function UserLogOut(){
             <Image 
             src={user.picture}
             alt={user.name}
-            width={20}
-            height={20}
+            width={40}
+            height={40}
             />
             <div className={styles.blockUserLogOut}>
             <div className={styles.containerUserLogOut}>

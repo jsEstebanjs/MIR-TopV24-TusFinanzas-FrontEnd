@@ -20,11 +20,16 @@
         justify-content: center;
         padding: 20px;
         .containerImgSettings{
+            display: flex;
             position: relative;
             width: max-content;
             height: max-content;
             border: 5px solid $White;
             border-radius: 10px;
+            img{
+                object-fit: cover;
+                border-radius: 10px;
+            }
             &:hover .hoverImge{
                 display: flex;
             }

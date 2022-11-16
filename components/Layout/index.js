@@ -5,11 +5,13 @@ import { useState } from "react";
 import HamburguerMainHome from "../HamburguerMainHome";
 import AddTransaccionModal from "../AddTransaccionModal";
 import UserLogOut from "../UserLogOut";
+import { useRouter } from "next/router";
 
 function Layout({ children, title }) {
   const [visibleTransaccionBtn, setVisibleTransaccionBtn] = useState(false);
   const [visibleHamburguer, setVisibleHamburguer] = useState(false);
   const [visibleTransaccion, setVisibleTransaccion] = useState(false);
+  const router = useRouter();
 
   const handleClickAddTransaccion = () => {
     setVisibleTransaccionBtn(!visibleTransaccionBtn);
@@ -66,58 +68,62 @@ function Layout({ children, title }) {
       </div>
 
       {/* aqui van los btn de entry and spent */}
-      <div
-        onClick={handleClickAddTransaccion}
-        className={styles.containerBtnAddTransaccion}
-      >
-        <p
-          className={`${styles.infoPTransaccionDesktop} ${
-            visibleTransaccionBtn ? styles.infoPTransaccionDesktopNoView : null
-          }`}
-        >
-          Agregar Transaccion
-        </p>
-        <span className={styles.btnAddTransaccion}>
-          <MdAdd
-            className={visibleTransaccionBtn ? styles.svgAddRotate : null}
-          />
-        </span>
-        <span
-          onClick={() => handleTransaccion("Gasto", "Red", "Expense")}
-          className={`${styles.btnAddTransaccion} ${
-            styles.btnAddTransaccionSpent
-          } ${
-            visibleTransaccionBtn ? styles.btnAddTransaccionSpentBottom : null
-          }`}
+      {router.pathname !== "/settings" ? (
+        <div
+          onClick={handleClickAddTransaccion}
+          className={styles.containerBtnAddTransaccion}
         >
           <p
-            className={`${styles.infoBtnAddTransaccion} ${
-              visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
+            className={`${styles.infoPTransaccionDesktop} ${
+              visibleTransaccionBtn
+                ? styles.infoPTransaccionDesktopNoView
+                : null
             }`}
           >
-            Gasto
+            Agregar Transaccion
           </p>
-          <MdRemove />
-        </span>
-        <span
-          onClick={() => handleTransaccion("Ingreso", "Green", "Entry")}
-          className={`${styles.btnAddTransaccion} ${
-            styles.btnAddTransaccionEntry
-          } ${
-            visibleTransaccionBtn ? styles.btnAddTransaccionEntryBottom : null
-          }`}
-        >
-          <p
-            className={`${styles.infoBtnAddTransaccion} ${
-              visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
+          <span className={styles.btnAddTransaccion}>
+            <MdAdd
+              className={visibleTransaccionBtn ? styles.svgAddRotate : null}
+            />
+          </span>
+          <span
+            onClick={() => handleTransaccion("Gasto", "Red", "Expense")}
+            className={`${styles.btnAddTransaccion} ${
+              styles.btnAddTransaccionSpent
+            } ${
+              visibleTransaccionBtn ? styles.btnAddTransaccionSpentBottom : null
             }`}
           >
-            Ingreso
-          </p>
+            <p
+              className={`${styles.infoBtnAddTransaccion} ${
+                visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
+              }`}
+            >
+              Gasto
+            </p>
+            <MdRemove />
+          </span>
+          <span
+            onClick={() => handleTransaccion("Ingreso", "Green", "Entry")}
+            className={`${styles.btnAddTransaccion} ${
+              styles.btnAddTransaccionEntry
+            } ${
+              visibleTransaccionBtn ? styles.btnAddTransaccionEntryBottom : null
+            }`}
+          >
+            <p
+              className={`${styles.infoBtnAddTransaccion} ${
+                visibleTransaccionBtn ? styles.infoBtnAddTransaccionView : null
+              }`}
+            >
+              Ingreso
+            </p>
 
-          <MdAdd />
-        </span>
-      </div>
+            <MdAdd />
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 }

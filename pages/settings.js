@@ -5,25 +5,34 @@ import { useSelector } from "react-redux";
 import UpdateUserInputs from "../components/UpdateUserInputs";
 import { MdCameraAlt } from "react-icons/md";
 import { useState } from "react";
-import ChangePictureUser from '../components/ChangePictureUser';
+import ChangePictureUser from "../components/ChangePictureUser";
 
 function Settings() {
   const user = useSelector((state) => state.UserSlice);
   const [visibleChangePicture, setVisibleChangePicture] = useState(false);
+
+  const pictureVisible = () => {
+    setVisibleChangePicture(!visibleChangePicture);
+  };
+
   return (
     <Layout title="Configuracion">
       <main className={styles.mainContainerSettings}>
-        <ChangePictureUser src={user.picture} alt={user.name}/>
+        <ChangePictureUser
+          src={user.picture}
+          alt={user.name}
+          isVisible={visibleChangePicture}
+          funcIsVisible={pictureVisible}
+        />
         <div className={styles.containerSettings}>
           <div className={styles.containerImgSettings}>
             <Image
               src={user.picture}
-              width={80}
-              height={80}
+              width={100}
+              height={100}
               alt={user.name}
-              objectFit="cover"
             />
-            <div onClick={()=> setVisibleChangePicture(true)} className={styles.hoverImge}>
+            <div onClick={pictureVisible} className={styles.hoverImge}>
               <MdCameraAlt />
               <p>Editar</p>
             </div>
@@ -36,6 +45,7 @@ function Settings() {
               value={user.name}
               length={3}
               exp={/^([A-ZÑÁÉÍÓÚÜ]||[a-zñáéíóú]+[\s]*)+$/}
+              objKey={"name"}
             />
             <UpdateUserInputs
               errorMessage="El email no es valido"
@@ -44,6 +54,7 @@ function Settings() {
               value={user.email}
               length={4}
               exp={/\S+@\S+\.\S+/}
+              objKey={"email"}
             />
           </div>
         </div>
