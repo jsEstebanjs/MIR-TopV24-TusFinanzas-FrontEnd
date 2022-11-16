@@ -1,0 +1,32 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerChangePictureUser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $Light-Black;
+    color: $White;
+    position: absolute;
+    left: calc(50% - 5%);
+    top: calc(50% - 200px);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 6px;
+    .containerIMG{
+        width: max-content;
+        height: max-content;
+        border: 5px solid $White;
+        border-radius: 10px;
+    }
+}
+.opacity{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $Black;
+    opacity: 0.75;
+    z-index: 1;
+}

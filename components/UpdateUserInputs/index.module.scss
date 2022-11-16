@@ -1,0 +1,72 @@
+@import '../../styles/abstracts/variables.scss';
+.mainContainerUpdateUserInputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid $Black;
+    padding: 12px;
+    .containerLabelAndEdit{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        .btnEdit{
+            color: $Main-Blue;
+            cursor: pointer;
+        }
+    }
+    .containerUpdate{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+        gap: 10px;
+        .inputContainerUpdate{
+            width: 100%;
+            max-width: 300px;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $White;
+            color: $White;
+            font-size: 16px;
+            padding-bottom: 5px;
+        }
+        .errorMessage{
+            font-size: 16px;
+            color: $Red;
+        }
+    }
+    .containerBtnSaveAndCancel{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        .btnSave{
+            color: $White;
+            background-color: $Main-Blue;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btnCancel{
+            color: $Black;
+            background-color: $White;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    }
+    .containerValue{
+        display: flex;
+        flex-direction: row;
+    }
+    .labelAndValue{
+        color: $White;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}

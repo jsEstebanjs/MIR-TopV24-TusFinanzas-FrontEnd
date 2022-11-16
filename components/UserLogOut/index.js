@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useSelector } from "react-redux";
 import styles from './index.module.scss';
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function UserLogOut(){
     const route = useRouter()
@@ -20,6 +21,7 @@ function UserLogOut(){
             />
             <div className={styles.blockUserLogOut}>
             <div className={styles.containerUserLogOut}>
+                <Link className={styles.infoContainerUserLogOut} href='/settings'>Configuracion</Link>
                 <p onClick={handleLogOut} className={styles.infoContainerUserLogOut}>Log Out</p>
             </div>
             </div>

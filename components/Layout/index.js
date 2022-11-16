@@ -29,8 +29,10 @@ function Layout({ children, title }) {
   const handleTransaccion = (title, color, type) => {
     if (title) {
       setVisibleTransaccion({ title, color, type });
+      document.body.style.overflow = "hidden";
     } else {
       setVisibleTransaccion(false);
+      document.body.style = "initial";
     }
   };
 

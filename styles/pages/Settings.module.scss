@@ -1,0 +1,58 @@
+@import '../abstracts/variables.scss';
+
+.mainContainerSettings{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    padding: 30px 10px 10px 10px;
+    align-items: center;
+    justify-content: center;
+    .containerSettings{
+        width: 100%;
+        max-width: 736px;
+        border-radius: 10px;
+        background-color: $Light-Black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        .containerImgSettings{
+            position: relative;
+            width: max-content;
+            height: max-content;
+            border: 5px solid $White;
+            border-radius: 10px;
+            &:hover .hoverImge{
+                display: flex;
+            }
+            .hoverImge{
+                position: absolute;
+                background-color: $Black;
+                opacity: 0.55;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                color: $White;
+                cursor: pointer;
+                font-size: 18px;
+                svg{
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+    .containerUpdateUserInputs{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+}
