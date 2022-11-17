@@ -6,10 +6,12 @@ import UpdateUserInputs from "../components/UpdateUserInputs";
 import { MdCameraAlt } from "react-icons/md";
 import { useState } from "react";
 import ChangePictureUser from "../components/ChangePictureUser";
+import ModalChangePassword from "../components/ModalChangePassword";
 
 function Settings() {
   const user = useSelector((state) => state.UserSlice);
   const [visibleChangePicture, setVisibleChangePicture] = useState(false);
+  const [visibleChangePassword,setVisibleChangePassword]=useState(false)
 
   const pictureVisible = () => {
     setVisibleChangePicture(!visibleChangePicture);
@@ -24,6 +26,7 @@ function Settings() {
           isVisible={visibleChangePicture}
           funcIsVisible={pictureVisible}
         />
+        <ModalChangePassword />
         <div className={styles.containerSettings}>
           <div className={styles.containerImgSettings}>
             <Image
@@ -56,6 +59,14 @@ function Settings() {
               exp={/\S+@\S+\.\S+/}
               objKey={"email"}
             />
+            <div className={styles.containerChangePassword}>
+              <p>
+                Contraseña
+              </p>
+              <p className={styles.pChangePassword}>
+                Cambiar contraseña
+              </p>
+            </div>
           </div>
         </div>
       </main>

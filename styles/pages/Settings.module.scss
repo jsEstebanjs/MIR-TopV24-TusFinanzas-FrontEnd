@@ -58,6 +58,18 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        .containerChangePassword{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid $Black;
+            padding: 12px;
+            color: $White;
+            .pChangePassword{
+                color: $Main-Blue;
+                cursor: pointer;
+            }
+        }
     }
     
 }

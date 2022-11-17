@@ -1,0 +1,20 @@
+@import '../../styles/abstracts/variables.scss';
+
+.opacity{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $Black;
+    opacity: 0.75;
+    z-index: 1;
+}
+.mainContainerModalChangePassword{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1;
+    background-color: $Light-Black;
+}
