@@ -68,7 +68,7 @@ function BalanceCard() {
       <div className={styles.containerAmountBalanceCard}>
         <p>Cantidad total que posee:</p>
         <p className={styles.pAmountBalanceCard}>
-          {lastTransactions.labels.length > 0 ? formatterPeso.format(lastTransactions.datasets[0].data[0]) : `$ ${0}`}
+          {lastTransactions.labels.length > 0 ? formatterPeso.format(lastTransactions.datasets[0].data[0]) : `$${0}`}
         </p>
       </div>
       <div className={styles.containerChartBalance}>
