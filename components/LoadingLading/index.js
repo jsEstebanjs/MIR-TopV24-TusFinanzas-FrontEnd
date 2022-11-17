@@ -1,5 +1,6 @@
 import styles from "./index.module.scss";
 import Image from "next/image";
+import { Ring } from "@uiball/loaders";
 
 function LoadingLanding() {
   return (
@@ -11,6 +12,7 @@ function LoadingLanding() {
         height={100}
         priority={true}
       />
+      <Ring size={35} color="#050505" />
     </div>
   );
 }
