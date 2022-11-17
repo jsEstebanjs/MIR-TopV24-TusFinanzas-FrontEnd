@@ -4,12 +4,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $White;
-    border-radius: 20px;
+    border-radius: 50%;
     width: max-content;
     height: max-content;
     cursor: pointer;
-    padding: 8px;
+    border: 2px solid $White;
+    img{
+        border-radius: 50%;
+        object-fit: cover;
+    }
     &:hover .blockUserLogOut{
         opacity: 1;
         pointer-events: initial;
@@ -30,6 +33,7 @@
             padding: 10px;
             color: $Black;
             border-radius: 20px;
+            gap: 10px;
             .infoContainerUserLogOut{
                 color: $Black;
                 font-size: 18px;

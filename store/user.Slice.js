@@ -20,11 +20,16 @@ export const userSlice = createSlice({
     },
     pushTransactionsIds:(state,action)=>{
       state.transactionsIds.push(action.payload);
-        
+    },
+    updateName:(state,action)=>{
+      state[action.payload.key] = action.payload.value
+    },
+    updatePicture:(state,action)=>{
+      state.picture = action.payload
     }
   },
 });
 
-export const { setInitialState, pushTransactionsIds } = userSlice.actions;
+export const { setInitialState, pushTransactionsIds,updateName,updatePicture } = userSlice.actions;
 
 export default userSlice.reducer;

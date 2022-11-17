@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import LoadingLanding from "../components/LoadingLading";
 import { validateToken } from "../utils/valideToken";
-import { setInitialState } from "../store/user.Slice";
+import userSlice, { setInitialState } from "../store/user.Slice";
 
 
 function MyApp({ Component, pageProps }) {

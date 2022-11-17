@@ -1,0 +1,102 @@
+@import '../../styles/abstracts/variables.scss';
+
+.mainContainerChangePictureUser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    background-color: $Light-Black;
+    color: $White;
+    position: absolute;
+    left: calc(50% - 140px);
+    top: calc(50% - 200px);
+    z-index: 1;
+    padding: 15px;
+    border-radius: 6px;
+    gap: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    .containerIMG{
+        display: flex;
+        width: max-content;
+        height: max-content;
+        border: 5px solid $White;
+        border-radius: 10px;
+        img{
+            object-fit: cover;
+        }
+        .containerLoader{
+            position: absolute;
+            left: calc(50% - 20px);
+            top: calc(50% - 20px);
+        }
+    }
+    .btnDeletePicture{
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        background-color: $Red;
+        color: $White;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    .inputDisable{
+        display: none;
+    }
+    .labelInputDisable{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $White;
+        color: $Black;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .containerBts{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+        justify-content: flex-end;
+        .btnSave{
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: $Main-Blue;
+            color: $White;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        .btnCancel{
+            background-color: $White;
+            color: $Black;
+        }
+    }
+}
+.mainContainerChangePictureUserVisible{
+    opacity: 1;
+    pointer-events: initial;
+}
+.opacity{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $Black;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.opacityVisible{
+    opacity: 0.75;
+    pointer-events: initial;
+}
