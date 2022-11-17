@@ -13,7 +13,7 @@ function ChartOfAccounts({ amount, latest }) {
       <h2 className={styles.titleContainerChartOfAccounts}>Cuentas</h2>
       <div className={styles.containerChartAndAmount}>
         <p className={styles.pChart}>Cartera</p>
-        <p className={styles.pAmountChart}>{date2 === false ? 0 : formatterPeso.format(transaccions.balance)}</p>
+        <p className={styles.pAmountChart}>{date2 === false ? `$0` : formatterPeso.format(transaccions.balance)}</p>
       </div>
       <p>
         Ultima vez usado:

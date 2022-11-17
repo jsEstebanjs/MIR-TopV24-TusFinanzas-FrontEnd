@@ -5,12 +5,14 @@ import { MdImage, MdSave } from "react-icons/md";
 import { updateUser } from "../../utils/updateUser";
 import axios from "axios";
 import { Ring } from "@uiball/loaders";
+import { updatePicture } from "../../store/user.Slice";
+import { useDispatch } from "react-redux";
 
 function ChangePictureUser({ src, alt, isVisible, funcIsVisible }) {
   const [image, setImage] = useState(null);
   const [objImg, setObjImg] = useState(null);
   const [loaderFetch, setLoaderFetch] = useState(false);
-
+  const dispatch = useDispatch();
   const handleSubmit = async (img) => {
     const data = new FormData();
     for (let i = 0; i < img.length; i++) {
@@ -35,20 +37,22 @@ function ChangePictureUser({ src, alt, isVisible, funcIsVisible }) {
   };
   const updateUserFetch = async (reset) => {
     if (reset) {
-      //para eliminar la foto
-      setLoaderFetch(true)
+      setLoaderFetch(true);
       const res = await updateUser({}, true);
-      console.log(res);
-      setLoaderFetch(false)
-      funcIsVisible()
+      dispatch(updatePicture(res.data.data.picture));
+      setObjImg(null)
+      setImage(null)
+      setLoaderFetch(false);
+      funcIsVisible();
     } else if (objImg !== null) {
-      //para subir nueva foto
-      setLoaderFetch(true)
+      setLoaderFetch(true);
       const res = await handleSubmit(objImg);
       const update = await updateUser({ picture: res.data.file_0 });
-      console.log(update);
-      setLoaderFetch(false)
-      funcIsVisible()
+      dispatch(updatePicture(update.data.data.picture));
+      setObjImg(null)
+      setImage(null)
+      setLoaderFetch(false);
+      funcIsVisible();
     }
   };
 
@@ -71,7 +75,7 @@ function ChangePictureUser({ src, alt, isVisible, funcIsVisible }) {
             alt={alt}
             width={150}
             height={150}
-            objectFit="cover"
+            priority={true}
           />
           {loaderFetch ? (
             <div className={styles.containerLoader}>

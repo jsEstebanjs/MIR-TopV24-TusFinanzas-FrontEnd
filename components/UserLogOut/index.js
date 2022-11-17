@@ -18,6 +18,7 @@ function UserLogOut(){
             alt={user.name}
             width={40}
             height={40}
+            priority={true}
             />
             <div className={styles.blockUserLogOut}>
             <div className={styles.containerUserLogOut}>

@@ -11,10 +11,13 @@ import ModalChangePassword from "../components/ModalChangePassword";
 function Settings() {
   const user = useSelector((state) => state.UserSlice);
   const [visibleChangePicture, setVisibleChangePicture] = useState(false);
-  const [visibleChangePassword,setVisibleChangePassword]=useState(false)
+  const [visibleChangePassword, setVisibleChangePassword] = useState(false);
 
   const pictureVisible = () => {
     setVisibleChangePicture(!visibleChangePicture);
+  };
+  const changePasswordVisible = () => {
+    setVisibleChangePassword(!visibleChangePassword);
   };
 
   return (
@@ -26,7 +29,10 @@ function Settings() {
           isVisible={visibleChangePicture}
           funcIsVisible={pictureVisible}
         />
-        <ModalChangePassword />
+        <ModalChangePassword
+          visible={visibleChangePassword}
+          funcVisible={changePasswordVisible}
+        />
         <div className={styles.containerSettings}>
           <div className={styles.containerImgSettings}>
             <Image
@@ -34,6 +40,7 @@ function Settings() {
               width={100}
               height={100}
               alt={user.name}
+              priority={true}
             />
             <div onClick={pictureVisible} className={styles.hoverImge}>
               <MdCameraAlt />
@@ -60,10 +67,11 @@ function Settings() {
               objKey={"email"}
             />
             <div className={styles.containerChangePassword}>
-              <p>
-                Contraseña
-              </p>
-              <p className={styles.pChangePassword}>
+              <p>Contraseña</p>
+              <p
+                onClick={changePasswordVisible}
+                className={styles.pChangePassword}
+              >
                 Cambiar contraseña
               </p>
             </div>
