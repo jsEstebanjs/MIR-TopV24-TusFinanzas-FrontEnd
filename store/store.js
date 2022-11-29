@@ -7,6 +7,5 @@ export const store = configureStore({
   reducer: {
     UserSlice: userSlice,
     TransaccionsSlice:transaccionsSlice,
-    LogOutSlice:logOutSlice
   },
 })
