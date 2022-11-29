@@ -4,25 +4,12 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { donutDataDefault } from "./constants";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { formatterPeso } from '../../utils/formatterPeso';
+import { formatterPeso } from "../../utils/formatterPeso";
+import { mouths } from "./constants";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function CardResumenHome() {
-  const mouths = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ];
   const lastTransaction = useSelector(
     (state) => state.TransaccionsSlice.docs[0]
   );
@@ -39,8 +26,8 @@ function CardResumenHome() {
           },
         ],
       });
-    }else{
-      setDonutData(donutDataDefault)
+    } else {
+      setDonutData(donutDataDefault);
     }
   }, [lastTransaction]);
 
@@ -54,7 +41,8 @@ function CardResumenHome() {
       <h3 className={styles.mainContainerCardMonth}>
         {!transactionDate
           ? "Ninguna"
-          : `${mouths[transactionDate.getMonth()]
+          : `${
+              mouths[transactionDate.getMonth()]
             } ${transactionDate.getFullYear()}`}
       </h3>
       <div className={styles.mainContainerCardEntryAndSpent}>
@@ -74,13 +62,19 @@ function CardResumenHome() {
           </div>
           <div>
             <p className={styles.pInfoCardEntry}>
-              {!transactionDate ? "$0.00" : formatterPeso.format(lastTransaction.todoEntry)}
+              {!transactionDate
+                ? "$0.00"
+                : formatterPeso.format(lastTransaction.todoEntry)}
             </p>
             <p className={styles.pInfoCardSpent}>
-              {!transactionDate ? "$0.00" : formatterPeso.format(lastTransaction.todoExpense)}
+              {!transactionDate
+                ? "$0.00"
+                : formatterPeso.format(lastTransaction.todoExpense)}
             </p>
             <p className={styles.pInfoResult}>
-              {!transactionDate ? "$0.00" :formatterPeso.format(lastTransaction.balance)}
+              {!transactionDate
+                ? "$0.00"
+                : formatterPeso.format(lastTransaction.balance)}
             </p>
           </div>
         </div>

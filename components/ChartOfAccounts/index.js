@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import { useSelector } from "react-redux";
 import { formatterPeso } from '../../utils/formatterPeso';
 
-function ChartOfAccounts({ amount, latest }) {
+function ChartOfAccounts() {
   const transaccions = useSelector((state) => state.TransaccionsSlice.docs[0]);
   let date2 = false;
   if (transaccions instanceof Object) {
