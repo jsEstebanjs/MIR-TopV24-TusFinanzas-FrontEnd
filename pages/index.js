@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CardResumenHome from "../components/CardResumenHome";
 import ChartOfAccounts from "../components/ChartOfAccounts";
 import BalanceCard from "../components/BalanceCard";
@@ -12,6 +12,7 @@ import styles from '../styles/pages/Home.module.scss'
 export default function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserSlice);
+  const [loader,setLoader] = useState(true)
 
   useEffect(() => {
     async function lastTransaccions() {
@@ -29,6 +30,7 @@ export default function Home() {
     if (localStorage.getItem("token")) {
       lastTransaccions();
     }
+    setLoader(false)
   }, [user.transactionsIds]);
 
   return (
@@ -37,7 +39,7 @@ export default function Home() {
         <CardResumenHome />
         <ChartOfAccounts />
         <BalanceCard />
-        <CardTransaccions />
+        <CardTransaccions loader={loader} />
       </main>
     </Layout>
   );

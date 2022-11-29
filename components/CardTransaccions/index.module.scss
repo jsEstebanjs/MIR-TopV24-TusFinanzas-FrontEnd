@@ -36,6 +36,12 @@
         display: flex;
         flex-direction: column;
         overflow-y: auto;
+        position: relative;
+        .containerLoaderTransaccions{
+            width: max-content;
+            height: max-content;
+            margin: 10px auto
+        }
     }
 }
 @media(max-width:900px){
