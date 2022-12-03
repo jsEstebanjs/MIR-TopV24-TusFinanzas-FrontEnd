@@ -14,8 +14,7 @@ function CardTransaccions({ loader }) {
           <div className={styles.containerLoaderTransaccions}>
             <Ring size={35} color="#050505" />
           </div>
-        ) : null}
-        {transaccions.length !== 0 ? (
+        ) : transaccions.length !== 0 ? (
           <>
             {transaccions.map((item) => (
               <ModalTransaccions

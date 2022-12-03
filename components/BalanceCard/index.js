@@ -35,6 +35,7 @@ function BalanceCard() {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
+    setLoader(true);
     async function lastTransactions() {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/transactions/lastTransaction`,
@@ -60,11 +61,11 @@ function BalanceCard() {
           },
         ],
       });
+      setLoader(false);
     }
     if (Cookies.get("token")) {
       lastTransactions();
     }
-    setLoader(false);
   }, [user.transactionsIds]);
 
   return (
@@ -74,7 +75,11 @@ function BalanceCard() {
         <p>Cantidad total que posee:</p>
         <p className={styles.pAmountBalanceCard}>
           {lastTransactions.labels.length > 0
-            ? formatterPeso.format(lastTransactions.datasets[0].data[lastTransactions.datasets[0].data.length - 1])
+            ? formatterPeso.format(
+                lastTransactions.datasets[0].data[
+                  lastTransactions.datasets[0].data.length - 1
+                ]
+              )
             : `$${0}`}
         </p>
       </div>
@@ -83,9 +88,9 @@ function BalanceCard() {
           <div className={styles.containerLoaderBalance}>
             <Ring size={35} color="#050505" />
           </div>
-        ) : 
+        ) : null}
+
         <Line options={options} data={lastTransactions} />
-        }
       </div>
     </div>
   );

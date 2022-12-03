@@ -17,6 +17,7 @@ function Home() {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
+    setLoader(true);
     async function lastTransaccions() {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/transactions?limit=10&page=1`,
@@ -28,18 +29,18 @@ function Home() {
       );
 
       dispatch(pushDocs(res.data.data.docs));
+      setLoader(false);
     }
     if (Cookies.get("token")) {
       lastTransaccions();
     }
-    setLoader(false);
   }, [user.transactionsIds]);
 
   return (
     <Layout title="Vista General">
       <main className={styles.mainContainerVisionGeneralTwo}>
-        <CardResumenHome />
-        <ChartOfAccounts />
+        <CardResumenHome loader={loader} />
+        <ChartOfAccounts loader={loader} />
         <BalanceCard />
         <CardTransaccions loader={loader} />
       </main>
