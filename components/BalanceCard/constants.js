@@ -6,7 +6,7 @@ export const options = {
         position:'top',
       },
     },
-    borderWidth: 2,
+    borderWidth: 4,
   };
   
   export const balanceData = {
