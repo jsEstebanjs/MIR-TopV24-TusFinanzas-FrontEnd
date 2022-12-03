@@ -11,7 +11,7 @@ export const transaccionsSlice = createSlice({
     pushDocs:(state,action)=>{
       state.docs = action.payload;
         
-    }
+    },
   },
 });
 
