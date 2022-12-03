@@ -14,34 +14,52 @@ function CardResumenHome({ loader }) {
   const lastTransaction = useSelector(
     (state) => state.TransaccionsSlice.docs[0]
   );
+  const [lastTransactionLocal, setLastTransactionLocal] =
+    useState(lastTransaction);
   const [donutData, setDonutData] = useState(donutDataDefault);
+  const date = new Date();
 
   useEffect(() => {
+    setLastTransactionLocal(lastTransaction);
     if (lastTransaction) {
-      setDonutData({
-        ...donutDataDefault,
-        datasets: [
-          {
-            ...donutDataDefault.datasets[0],
-            data: [lastTransaction?.todoEntry, lastTransaction?.todoExpense, 0],
-          },
-        ],
-      });
+      const lastDate = new Date(lastTransaction.createdAt);
+      if (date.getMonth() !== lastDate.getMonth()) {
+        setLastTransactionLocal({
+          balance: 0,
+          createdAt: date,
+          todoEntry: 0,
+          todoExpense: 0,
+        });
+      } else {
+        setDonutData({
+          ...donutDataDefault,
+          datasets: [
+            {
+              ...donutDataDefault.datasets[0],
+              data: [
+                lastTransaction?.todoEntry,
+                lastTransaction?.todoExpense,
+                0,
+              ],
+            },
+          ],
+        });
+      }
     } else {
       setDonutData(donutDataDefault);
     }
   }, [lastTransaction]);
 
-  const transactionDate = lastTransaction?.createdAt
-    ? new Date(lastTransaction.createdAt)
+  const transactionDate = lastTransactionLocal?.createdAt
+    ? new Date(lastTransactionLocal.createdAt)
     : null;
 
   return (
     <div className={styles.mainContainerCardResumen}>
-      <h2 className={styles.mainContainerCardTitle}>Resumen</h2>
+      <h2 className={styles.mainContainerCardTitle}>Resumen mensual</h2>
       <h3 className={styles.mainContainerCardMonth}>
         {!transactionDate
-          ? "Ninguna"
+          ? "Ninguna por este mes"
           : `${
               mouths[transactionDate.getMonth()]
             } ${transactionDate.getFullYear()}`}
@@ -71,17 +89,17 @@ function CardResumenHome({ loader }) {
                 <p className={styles.pInfoCardEntry}>
                   {!transactionDate
                     ? "$0.00"
-                    : formatterPeso.format(lastTransaction.todoEntry)}
+                    : formatterPeso.format(lastTransactionLocal.todoEntry)}
                 </p>
                 <p className={styles.pInfoCardSpent}>
                   {!transactionDate
                     ? "$0.00"
-                    : formatterPeso.format(lastTransaction.todoExpense)}
+                    : formatterPeso.format(lastTransactionLocal.todoExpense)}
                 </p>
                 <p className={styles.pInfoResult}>
                   {!transactionDate
                     ? "$0.00"
-                    : formatterPeso.format(lastTransaction.balance)}
+                    : formatterPeso.format(lastTransactionLocal.balance)}
                 </p>
               </div>
             </div>

@@ -29,7 +29,7 @@ function ChartOfAccounts({ loader }) {
           <p>
             Ultima vez usado:
             {date2 === false
-              ? " Ninguno"
+              ? " Ninguna por este mes"
               : ` ${date2.getDate()}/${
                   date2.getMonth() + 1
                 }/${date2.getFullYear()}`}

@@ -8,7 +8,7 @@ function CardTransaccions({ loader }) {
 
   return (
     <div className={styles.mainContainerCardTransaccions}>
-      <h2 className={styles.titleContainerCardTransaccions}>Transacciones</h2>
+      <h2 className={styles.titleContainerCardTransaccions}>Ultimas 10 transacciones</h2>
       <div className={styles.containerModalTransaccions}>
         {loader ? (
           <div className={styles.containerLoaderTransaccions}>
