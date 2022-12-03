@@ -3,25 +3,30 @@ import { updateUser } from "../../utils/updateUser";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import ErrorLoginAndRegister from "../ErrorLoginAndRegister";
+import Cookies from "js-cookie";
+import { ResetState } from "../../store/user.Slice";
+import { useDispatch } from "react-redux";
 
 function ModalChangePassword({ visible, funcVisible }) {
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [error, setError] = useState(false);
-  const [errorChangePassword,setErrorChangePassword] = useState("")
-  const router = useRouter()
+  const [errorChangePassword, setErrorChangePassword] = useState("");
+  const router = useRouter();
+  const dispatch = useDispatch()
 
   const handleSubmitChangePassword = async () => {
     if (/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(newPassword)) {
       setError(false);
       const res = await updateUser({ oldPassword, password: newPassword });
-      if(res !== false){
-        localStorage.removeItem("token")
-        router.push("/login")
-        setNewPassword("")
-        setOldPassword("")
-      }else{
-        errorChangeNewPassword("Error al actualizar la contraseña")
+      if (res !== false) {
+        Cookies.remove("token");
+        dispatch(ResetState())
+        router.push("/login");
+        setNewPassword("");
+        setOldPassword("");
+      } else {
+        errorChangeNewPassword("Error al actualizar la contraseña");
       }
     } else {
       setError(true);
@@ -43,12 +48,16 @@ function ModalChangePassword({ visible, funcVisible }) {
   };
 
   const errorChangeNewPassword = (value) => {
-    setErrorChangePassword(value)
-  }
+    setErrorChangePassword(value);
+  };
 
   return (
     <>
-    <ErrorLoginAndRegister errorMessage={errorChangePassword} active={errorChangePassword} handle={errorChangeNewPassword}/>
+      <ErrorLoginAndRegister
+        errorMessage={errorChangePassword}
+        active={errorChangePassword}
+        handle={errorChangeNewPassword}
+      />
       <div
         onClick={funcVisible}
         className={`${styles.opacity} ${

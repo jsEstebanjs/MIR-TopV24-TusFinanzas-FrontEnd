@@ -40,8 +40,8 @@ function ChangePictureUser({ src, alt, isVisible, funcIsVisible }) {
       setLoaderFetch(true);
       const res = await updateUser({}, true);
       dispatch(updatePicture(res.data.data.picture));
-      setObjImg(null)
-      setImage(null)
+      setObjImg(null);
+      setImage(null);
       setLoaderFetch(false);
       funcIsVisible();
     } else if (objImg !== null) {
@@ -49,8 +49,8 @@ function ChangePictureUser({ src, alt, isVisible, funcIsVisible }) {
       const res = await handleSubmit(objImg);
       const update = await updateUser({ picture: res.data.file_0 });
       dispatch(updatePicture(update.data.data.picture));
-      setObjImg(null)
-      setImage(null)
+      setObjImg(null);
+      setImage(null);
       setLoaderFetch(false);
       funcIsVisible();
     }

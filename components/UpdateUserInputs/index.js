@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import { useState } from "react";
 import { updateUser } from "../../utils/updateUser";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateName } from "../../store/user.Slice";
 import { Ring } from "@uiball/loaders";
 

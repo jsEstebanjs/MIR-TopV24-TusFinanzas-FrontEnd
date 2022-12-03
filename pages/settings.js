@@ -7,6 +7,7 @@ import { MdCameraAlt } from "react-icons/md";
 import { useState } from "react";
 import ChangePictureUser from "../components/ChangePictureUser";
 import ModalChangePassword from "../components/ModalChangePassword";
+import { ProtectRoute } from "../components/withAuth/index";
 
 function Settings() {
   const user = useSelector((state) => state.UserSlice);
@@ -81,7 +82,7 @@ function Settings() {
     </Layout>
   );
 }
-export default Settings;
+export default ProtectRoute(Settings);
 
 export async function getStaticProps(context) {
   return {
