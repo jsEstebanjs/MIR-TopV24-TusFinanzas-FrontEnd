@@ -7,12 +7,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { pushDocs } from "../store/transaccions.Slice";
 import Layout from "../components/Layout";
-import styles from '../styles/pages/Home.module.scss'
+import styles from "../styles/pages/Home.module.scss";
+import Cookies from "js-cookie";
+import { ProtectRoute } from "../components/withAuth/index";
 
-export default function Home() {
+function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserSlice);
-  const [loader,setLoader] = useState(true)
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     async function lastTransaccions() {
@@ -20,17 +22,17 @@ export default function Home() {
         `${process.env.NEXT_PUBLIC_API_URL}/transactions?limit=10&page=1`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
 
       dispatch(pushDocs(res.data.data.docs));
     }
-    if (localStorage.getItem("token")) {
+    if (Cookies.get("token")) {
       lastTransaccions();
     }
-    setLoader(false)
+    setLoader(false);
   }, [user.transactionsIds]);
 
   return (
@@ -44,6 +46,7 @@ export default function Home() {
     </Layout>
   );
 }
+export default ProtectRoute(Home);
 
 export async function getStaticProps(context) {
   return {

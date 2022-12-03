@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const updateUser = async (body, reset = false) => {
   try {
@@ -7,7 +8,7 @@ export const updateUser = async (body, reset = false) => {
       { ...body, resetPicture: reset },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     );

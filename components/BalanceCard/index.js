@@ -17,6 +17,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { formatterPeso } from "../../utils/formatterPeso";
 import { Ring } from "@uiball/loaders";
+import Cookies from "js-cookie";
 
 ChartJS.register(
   CategoryScale,
@@ -39,7 +40,7 @@ function BalanceCard() {
         `${process.env.NEXT_PUBLIC_API_URL}/transactions/lastTransaction`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
@@ -60,7 +61,7 @@ function BalanceCard() {
         ],
       });
     }
-    if (localStorage.getItem("token")) {
+    if (Cookies.get("token")) {
       lastTransactions();
     }
     setLoader(false);
@@ -73,7 +74,7 @@ function BalanceCard() {
         <p>Cantidad total que posee:</p>
         <p className={styles.pAmountBalanceCard}>
           {lastTransactions.labels.length > 0
-            ? formatterPeso.format(lastTransactions.datasets[0].data[0])
+            ? formatterPeso.format(lastTransactions.datasets[0].data[lastTransactions.datasets[0].data.length - 1])
             : `$${0}`}
         </p>
       </div>

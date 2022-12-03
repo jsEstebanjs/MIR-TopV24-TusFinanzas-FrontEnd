@@ -6,16 +6,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Ring } from "@uiball/loaders";
 import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import { ProtectRoute } from "../components/withAuth/index";
 
 function Transactions() {
   const date = new Date();
   const user = useSelector((state) => state.UserSlice);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [dateObj, setDateObj] = useState({
     year: date.getFullYear(),
     month: date.getMonth(),
   });
-  const [transactions,setTransactions] = useState([])
+  const [transactions, setTransactions] = useState([]);
   const Months = [
     "Enero",
     "Febrero",
@@ -32,82 +34,75 @@ function Transactions() {
   ];
   useEffect(() => {
     async function lastTransaccions() {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/transactions/transactionsMonth?month=${dateObj.month}&year=${dateObj.year}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
-      setTransactions(res.data.data.reverse())
-      setLoading(false)
+      setTransactions(res.data.data.reverse());
+      setLoading(false);
     }
-    if (localStorage.getItem("token")) {
+    if (Cookies.get("token")) {
       lastTransaccions();
     }
-  }, [dateObj,user.transactionsIds]);
-  const anotherMonth = (type)=>{
-    if(type === "left"){
-      if(dateObj.month === 0){
-        setDateObj({...dateObj,month:11,year:dateObj.year - 1})
-      }else{
-        setDateObj({...dateObj,month:dateObj.month - 1})
+  }, [dateObj, user.transactionsIds]);
+  const anotherMonth = (type) => {
+    if (type === "left") {
+      if (dateObj.month === 0) {
+        setDateObj({ ...dateObj, month: 11, year: dateObj.year - 1 });
+      } else {
+        setDateObj({ ...dateObj, month: dateObj.month - 1 });
       }
-
-    }else{
-      if(dateObj.month === 11){
-        setDateObj({...dateObj,month:0,year:dateObj.year + 1})
-      }else{
-        setDateObj({...dateObj,month:dateObj.month + 1})
+    } else {
+      if (dateObj.month === 11) {
+        setDateObj({ ...dateObj, month: 0, year: dateObj.year + 1 });
+      } else {
+        setDateObj({ ...dateObj, month: dateObj.month + 1 });
       }
-
     }
-  }
+  };
   return (
     <Layout title="Transacciones">
       <main className={styles.mainContainerTransactions}>
         <div className={styles.containerNavMonthsAndYears}>
-          <span onClick={()=> anotherMonth("left")}>
+          <span onClick={() => anotherMonth("left")}>
             <MdKeyboardArrowLeft />
           </span>
           <p className={styles.infoMonthAndYear}>
             {Months[dateObj.month]} {dateObj.year}
           </p>
-          <span onClick={()=> anotherMonth("right")}>
+          <span onClick={() => anotherMonth("right")}>
             <MdKeyboardArrowRight />
           </span>
         </div>
         <div className={styles.containerTransactions}>
-          {transactions.length
-          >=
-          1
-          ?
-          transactions.map((item)=>(
-            <ModalTransaccions
-            key={item._id}
-            amount={item.amount}
-            date={item.createdAt}
-            category={item.nameCategory}
-            wallet={"Cartera"}
-            type={item.type}
-            img={item.favicon}
-            />
-          ))
-          :
-          loading
-          ?
-          <Ring size={50} color="#050505" />
-          :
-          <p>No hay Transacciones en este mes</p>
-        }
+          {transactions.length >= 1 ? (
+            transactions.map((item) => (
+              <ModalTransaccions
+                key={item._id}
+                amount={item.amount}
+                date={item.createdAt}
+                category={item.nameCategory}
+                wallet={"Cartera"}
+                type={item.type}
+                img={item.favicon}
+              />
+            ))
+          ) : loading ? (
+            <Ring size={50} color="#050505" />
+          ) : (
+            <p>No hay Transacciones en este mes</p>
+          )}
         </div>
       </main>
     </Layout>
   );
 }
-export default Transactions;
+export default ProtectRoute(Transactions);
 
 export async function getStaticProps(context) {
   return {

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { Ring } from "@uiball/loaders";
 import { useDispatch } from "react-redux";
 import { setInitialState } from "../../store/user.Slice";
+import Cookies from "js-cookie";
 
 function FormAuth({ btn, isName, url }) {
   const router = useRouter();
@@ -30,7 +31,7 @@ function FormAuth({ btn, isName, url }) {
     const result = await loginAndRegister(url, data);
     if (result instanceof Object) {
       dispatch(setInitialState(result.data.data.user));
-      localStorage.setItem("token", result.data.data.token);
+      Cookies.set("token", result.data.data.token);
       router.push("/");
     } else {
       handleErrorModal(result);

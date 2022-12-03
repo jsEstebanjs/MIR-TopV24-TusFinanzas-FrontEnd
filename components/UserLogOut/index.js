@@ -1,14 +1,19 @@
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./index.module.scss";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { ResetState } from "../../store/user.Slice";
+
 
 function UserLogOut() {
   const route = useRouter();
   const user = useSelector((state) => state.UserSlice);
+  const dispatch = useDispatch();
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    Cookies.remove("token");
+    dispatch(ResetState());
     route.push("/login");
   };
   return (

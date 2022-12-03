@@ -27,6 +27,12 @@ export const userSlice = createSlice({
     updatePicture: (state, action) => {
       state.picture = action.payload;
     },
+    ResetState:(state,action)=>{
+      return {
+        ...state,
+        ...initialState,
+      };
+    }
   },
 });
 
@@ -35,6 +41,7 @@ export const {
   pushTransactionsIds,
   updateName,
   updatePicture,
+  ResetState
 } = userSlice.actions;
 
 export default userSlice.reducer;
