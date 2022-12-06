@@ -27,8 +27,21 @@ function CardResumenHome({ loader }) {
         setLastTransactionLocal({
           balance: 0,
           createdAt: date,
-          todoEntry: 0,
+          todoEntry: lastTransaction.balance,
           todoExpense: 0,
+        });
+        setDonutData({
+          ...donutDataDefault,
+          datasets: [
+            {
+              ...donutDataDefault.datasets[0],
+              data: [
+                lastTransaction.balance,
+                0,
+                0,
+              ],
+            },
+          ],
         });
       } else {
         setDonutData({
