@@ -11,7 +11,7 @@ function ChartOfAccounts({ loader }) {
   }
   return (
     <div className={styles.mainContainerChartOfAccounts}>
-      <h2 className={styles.titleContainerChartOfAccounts}>Cuentas</h2>
+      <h2 className={styles.titleContainerChartOfAccounts}>Cuenta</h2>
       {loader ? (
         <div className={styles.containerLoaderChartOfAccounts}>
           <Ring size={35} color="#050505" />
@@ -29,7 +29,7 @@ function ChartOfAccounts({ loader }) {
           <p>
             Ultima vez usado:
             {date2 === false
-              ? " Ninguna por este mes"
+              ? " Ninguna"
               : ` ${date2.getDate()}/${
                   date2.getMonth() + 1
                 }/${date2.getFullYear()}`}
