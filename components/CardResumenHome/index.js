@@ -23,7 +23,7 @@ function CardResumenHome({ loader }) {
     setLastTransactionLocal(lastTransaction);
     if (lastTransaction) {
       const lastDate = new Date(lastTransaction.createdAt);
-      if (date.getMonth() !== lastDate.getMonth()) {
+      if (date.getMonth() !== lastDate.getMonth() ||date.getFullYear() !== lastDate.getFullYear()) {
         setLastTransactionLocal({
           balance: 0,
           createdAt: date,
@@ -38,7 +38,7 @@ function CardResumenHome({ loader }) {
               data: [
                 lastTransaction.balance,
                 0,
-                0,
+                lastTransaction.balance === 0 ? 100 : 0,
               ],
             },
           ],
@@ -66,13 +66,14 @@ function CardResumenHome({ loader }) {
   const transactionDate = lastTransactionLocal?.createdAt
     ? new Date(lastTransactionLocal.createdAt)
     : null;
-
   return (
     <div className={styles.mainContainerCardResumen}>
       <h2 className={styles.mainContainerCardTitle}>Resumen mensual</h2>
       <h3 className={styles.mainContainerCardMonth}>
         {!transactionDate
-          ? "Ninguna por este mes"
+          ? `${
+            mouths[date.getMonth()]
+          } ${date.getFullYear()}`
           : `${
               mouths[transactionDate.getMonth()]
             } ${transactionDate.getFullYear()}`}
