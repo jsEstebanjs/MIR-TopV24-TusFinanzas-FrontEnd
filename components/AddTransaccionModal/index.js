@@ -166,7 +166,10 @@ function AddTransaccionModal({ color, type, title, visible, handle }) {
             </div>
             <div className={styles.containerLabelAndInputFormAuth}>
               <label htmlFor="description">Notas (Opcional)</label>
-              <textarea id="description" {...register("description")} />
+              <textarea id="description" {...register("description",{
+                  required: true,
+                  maxlength: 100,
+                })} />
             </div>
             <div className={styles.containerBtnForm}>
               <button
