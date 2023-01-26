@@ -61,20 +61,33 @@ function BalanceCard() {
           },
         }
       );
-      console.log(res)
       const lastDateTransaction = new Date(res.data.data[0]?.date)
-      //la primera res.data.data[0] es igual a la ultima transaccion de ahi tomar el mes y la fecha
-      //ir realizando las transacciones desde mi fecha y ir comparando si tengo 6 stop si es igual la fecha a la ultima stop
-      //const date = new Date("2022/02/01")
 
       const months = [];
       const balanceMonths = [];
       if(lastDateTransaction.getMonth() !== date.getMonth() && lastDateTransaction.getFullYear() !== date.getFullYear()){
-        console.log("no son iguales")
-        for (let i = 0; i < res.data.data.length; i++) {
-          const dateTransactions = new Date(res.data.data[i].date)
-          months.unshift(`${monthsName[dateTransactions.getMonth()]} ${dateTransactions.getFullYear()}`);
-          balanceMonths.unshift(res.data.data[i].balance);
+        let currentMonth = date.getMonth();
+        let currentYear = date.getFullYear()
+        for (let i = 0; i < 6; i++) {
+          if(lastDateTransaction.getMonth() === currentMonth && lastDateTransaction.getFullYear() === currentYear){
+            for(let x = 0;months.length < 6;x++){
+              if(res.data.data[x] === undefined){
+                break
+              }
+              const dateTransactions = new Date(res.data.data[x]?.date)
+              months.unshift(`${monthsName[dateTransactions.getMonth()]} ${dateTransactions.getFullYear()}`);
+              balanceMonths.unshift(res.data.data[x].balance);
+            }
+
+          }else{
+            months.unshift(`${monthsName[currentMonth]} ${currentYear}`);
+            balanceMonths.unshift(res.data.data[0].balance);
+            currentMonth--
+            if(currentMonth < 0){
+              currentMonth = 11
+              currentYear--
+            }
+          }
         }
       }else{
         for (let i = 0; i < res.data.data.length; i++) {
