@@ -33,6 +33,22 @@ function BalanceCard() {
   const [lastTransactions, setLastTransactions] = useState(balanceData);
   const user = useSelector((state) => state.UserSlice);
   const [loader, setLoader] = useState(true);
+  const date = new Date()
+
+  const monthsName = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
 
   useEffect(() => {
     setLoader(true);
@@ -45,11 +61,40 @@ function BalanceCard() {
           },
         }
       );
+      const lastDateTransaction = new Date(res.data.data[0]?.date)
+
       const months = [];
       const balanceMonths = [];
-      for (let i = 0; i < res.data.data.length; i++) {
-        months.unshift(res.data.data[i].month);
-        balanceMonths.unshift(res.data.data[i].balance);
+      if(lastDateTransaction.getMonth() !== date.getMonth() && lastDateTransaction.getFullYear() !== date.getFullYear()){
+        let currentMonth = date.getMonth();
+        let currentYear = date.getFullYear()
+        for (let i = 0; i < 6; i++) {
+          if(lastDateTransaction.getMonth() === currentMonth && lastDateTransaction.getFullYear() === currentYear){
+            for(let x = 0;months.length < 6;x++){
+              if(res.data.data[x] === undefined){
+                break
+              }
+              const dateTransactions = new Date(res.data.data[x]?.date)
+              months.unshift(`${monthsName[dateTransactions.getMonth()]} ${dateTransactions.getFullYear()}`);
+              balanceMonths.unshift(res.data.data[x].balance);
+            }
+
+          }else{
+            months.unshift(`${monthsName[currentMonth]} ${currentYear}`);
+            balanceMonths.unshift(res.data.data[0].balance);
+            currentMonth--
+            if(currentMonth < 0){
+              currentMonth = 11
+              currentYear--
+            }
+          }
+        }
+      }else{
+        for (let i = 0; i < res.data.data.length; i++) {
+          const dateTransactions = new Date(res.data.data[i].date)
+          months.unshift(`${monthsName[dateTransactions.getMonth()]} ${dateTransactions.getFullYear()}`);
+          balanceMonths.unshift(res.data.data[i].balance);
+        }
       }
       setLastTransactions({
         ...lastTransactions,
